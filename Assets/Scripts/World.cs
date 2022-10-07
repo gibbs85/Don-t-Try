@@ -18,7 +18,7 @@ public class World
     private int time;
     private int[] timeTurns; // 턴 마다의 시간
     private int turn; // 0턴은 플레이 불가. 1, 2, 3, ... 턴은 TimeTurns에 매치
-    private int day; //0=토요일, 2=월요일 .... 6 = 금요일
+    private int day; // enum DaysOfTheWeek 사용.
     private int date;
     private SortedList<int, EventContainer> eventQueue;
 
