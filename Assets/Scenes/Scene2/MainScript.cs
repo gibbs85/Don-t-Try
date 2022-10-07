@@ -194,11 +194,20 @@ public class MainScript : MonoBehaviour
         else if (Day == 6) date.text = "금요일";
 
         SetTextTime();
+
+        /*
+         *  이벤트 테스트
+         */
+        /*
+        EventContainer event_test = new Event_Test00();
+        event_test.executeEvent();
+        */
+
+
     }
 
     public void nextTime()
     {
-        print("nextTime: " + Time);
         Turn++;
         if (Turn >= TimeTurns.Length)
         {
