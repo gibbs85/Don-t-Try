@@ -83,9 +83,9 @@ public class World
 
         this.time = this.timeTurns[this.turn];
         SystemControl.Instance.player.exhaustFatigue(1);
+        SystemControl.Instance.stockControl.updateAllStocks(this.time - this.timeTurns[this.turn - 1]);//not sure
 
         UI_GamePlay.update_time();
-        //GameObject.Find("StockControl").GetComponent<Stocks>().UpdateAllStocks(this.time - this.timeTurns[this.turn - 1]); // 주식 업데이트
     }
 
     public void addEventQueue(EventContainer anEvent)

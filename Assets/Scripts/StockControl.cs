@@ -57,15 +57,15 @@ public class StockControl
 
     public void new_game()
     {
-        StockV2 stockSamsung = new StockV2(100, "삼성전자", 68000);
-        StockV2 stockKakao = new StockV2(101, "카카오", 83000);
-        StockV2 stockHyundai = new StockV2(102, "현대자동차", 186500);
-        StockV2 stockSk = new StockV2(103, "SK텔레콤", 58200);
-        StockV2 stockLg = new StockV2(104, "LG화학", 545000);
-        StockV2 stockApple = new StockV2(105, "Apple", 175254);
-        StockV2 stockNaver = new StockV2(106, "Naver", 275000);
-        StockV2 stockGoogle = new StockV2(107, "Google", 2774420);
-        StockV2 stockMeta = new StockV2(108, "META", 50000);
+        StockV2 stockSamsung = new StockV2(100, "사성전자", 68000);
+        StockV2 stockKakao = new StockV2(101, "까까오", 83000);
+        StockV2 stockHyundai = new StockV2(102, "현재자동차", 186500);
+        StockV2 stockSk = new StockV2(103, "애스끼텔레콤", 58200);
+        StockV2 stockLg = new StockV2(104, "헬지화학", 545000);
+        StockV2 stockApple = new StockV2(105, "아플", 175254);
+        StockV2 stockNaver = new StockV2(106, "네버", 275000);
+        StockV2 stockGoogle = new StockV2(107, "구귤", 2774420);
+        StockV2 stockMeta = new StockV2(108, "MEKA", 50000);
 
         this.stocks.Add(stockSamsung);
         this.stocks.Add(stockKakao);
@@ -163,6 +163,11 @@ public class StockControl
     public StockV2 getStock(int stockCode)
     {
         return this.stocks.Find(stock => stock.getCode() == stockCode);
+    }
+
+    public StockV2 getStock(string stockName)
+    {
+        return this.stocks.Find(stock => stock.getName() == stockName);
     }
 
 

@@ -82,7 +82,37 @@ public class ChartStock : MonoBehaviour
     public void getData()
     {
         string stockName = GameObject.Find("StockDetailScript").GetComponent<StockDetailScript>().getStockName();
-        this.data = GameObject.Find("Stocks").GetComponent<Stocks>().getStockByName(stockName).getPriceRecord();
+        LinkedList<double> record = SystemControl.Instance.stockControl.getStock(stockName).getRecordPrice();
+
+        /*
+        임시 기능. LinkedList를 배열화
+         */
+        int lengthData = record.Count;
+        double[] dataArray = new double[lengthData];
+
+        int index = 0;
+        foreach(double price in record)
+        {
+            if(index == lengthData)
+            {
+                break;
+            }
+            else
+            {
+                dataArray[index] = price;
+                index++;
+            }
+        }
+        this.data = dataArray;
+
+        Debug.Log("lengthData : " + lengthData);
+        Debug.Log("lengthArray : " + dataArray.Length);
+        Debug.Log("1st data : " + dataArray[0]);
+        Debug.Log("2nd data : " + dataArray[1]);
+        Debug.Log("last-1 data : " + dataArray[lengthData - 2]);
+        Debug.Log("last data : " + dataArray[lengthData-1]);
+
+        //this.data = GameObject.Find("Stocks").GetComponent<Stocks>().getStockByName(stockName).getPriceRecord();
     }
 
     public void sampleData(int n)
