@@ -6,6 +6,7 @@ public class SystemControl : MonoBehaviour
 {
     public Player player;
     public World world;
+    public StockControl stockControl;
 
     private static SystemControl instance = null;
 
@@ -47,7 +48,11 @@ public class SystemControl : MonoBehaviour
         Debug.Log("SystemControl new_game() called.");
         this.player = new Player(1911);
         this.world = new World();
-        this.world.init();
+        this.stockControl = new StockControl();
+
+        this.world.new_game();
+        this.stockControl.new_game();
+
     }
 
 

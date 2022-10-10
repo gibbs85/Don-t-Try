@@ -26,6 +26,7 @@ public class Player
 
     *public void setName(string name);
 
+    public int getCode();                       // 완료
     public string getName();                    // 완료
     public double getMoney();                   // 완료
     public int getFatigue();                    // 완료
@@ -70,6 +71,11 @@ public class Player
             UI_GamePlay.update_fatigue();
             return true;
         }
+    }
+
+    public int getCode()
+    {
+        return this.code;
     }
 
     public string getName()

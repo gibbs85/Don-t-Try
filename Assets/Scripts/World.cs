@@ -23,7 +23,7 @@ public class World
     private SortedList<int, EventContainer> eventQueue;
 
     /*
-    public void init();                     // 추가 작업 필요
+    public void new_game();                     // 추가 작업 필요
     public void system_save();              // 없음
     public void system_load();              // 없음
 
@@ -49,7 +49,7 @@ public class World
         this.eventQueue = new SortedList<int, EventContainer>();
     }
 
-    public void init()
+    public void new_game()
     {
         this.turn = 1;
         this.time = this.timeTurns[this.turn];

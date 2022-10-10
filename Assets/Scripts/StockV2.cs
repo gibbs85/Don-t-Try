@@ -28,10 +28,12 @@ public class StockV2
     public string getDesc();                                    // 완료
     public LinkedList<double> getRecordPrice();                 // 완료
     public LinkedList<double> getRecordWeight();                // 완료
+    public int getLengthRecord();                               // 완료
     public void setName(string name);                           // 완료
     public void setDesc(string description);                    // 완료
     public void setMean(double newMean);                        // 완료
     public void setStd(double newStd);                          // 완료
+    
      */
 
     public StockV2(int code, string name, double initPrice)
@@ -148,6 +150,12 @@ public class StockV2
     public LinkedList<double> getRecordWeight()
     {
         return this.recordWeight;
+    }
+
+    public int getLengthRecord()
+    {
+        int count = this.recordPrice.Count;
+        return count;
     }
 
     public void setName(string name)
