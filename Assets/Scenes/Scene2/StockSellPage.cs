@@ -117,7 +117,8 @@ public class StockSellPage : MonoBehaviour
             return;
 
         GameObject.Find("Stocks").GetComponent<Stocks>().SellStock(GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), this.stockCount);
-        Player.player.SetMoney(Player.player.GetMoney() + this.stockPriceCaled);
+        //Player.player.SetMoney(Player.player.GetMoney() + this.stockPriceCaled);
+        GameObject.Find("SystemControl").GetComponent<SystemControl>().player.spendMoney(-this.stockPriceCaled);
         this.refresh();
     }
 }

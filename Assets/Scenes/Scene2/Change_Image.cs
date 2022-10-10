@@ -15,7 +15,8 @@ public class Change_Image : MonoBehaviour
     public void Start()
     {
         print("started");
-        int money = Player.player.GetMoney();
+        //int money = Player.player.GetMoney();
+        int money = (int)(GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getMoney());
 
         if (money >= 0 && money < 100)
             BackGround.GetComponent<Image>().sprite = level1;

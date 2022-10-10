@@ -43,7 +43,7 @@ public class StockBuyPage : MonoBehaviour
         GameObject.Find("StockBuyPage").transform.Find("TextStockBuyCount").GetComponentInChildren<TextMeshProUGUI>().text = this.stockCount + "주";
         GameObject.Find("StockBuyPage").transform.Find("TextStockBuyPriceCaled").GetComponentInChildren<TextMeshProUGUI>().text = this.stockPriceCaled.ToString("c", numberFormat);
         
-        if (this.stockPriceCaled > Player.player.GetMoney())
+        if (this.stockPriceCaled > GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getMoney())
         {
             GameObject.Find("StockBuyPage").transform.Find("TextStockBuyPriceCaled").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(255, 38, 4, 255);
         }
@@ -103,19 +103,20 @@ public class StockBuyPage : MonoBehaviour
 
     public void BuyConfirmClicked()
     {
-        print("피로도: " + GameObject.Find("Player").GetComponent<Player>().GetTired());
-        if (this.stockPriceCaled > Player.player.GetMoney()) // 구매할 돈 없음
+        print("피로도: " + GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getFatigue());
+        if (this.stockPriceCaled > GetComponent<SystemControl>().player.getMoney()) // 구매할 돈 없음
             return;
 
         if (GameObject.Find("Main").GetComponent<MainScript>().useTired(1) == false)
             return;
-        print("피로도 after if: " + GameObject.Find("Player").GetComponent<Player>().GetTired());
+        print("피로도 after if: " + GetComponent<SystemControl>().player.getFatigue());
 
         GameObject.Find("Stocks").GetComponent<Stocks>().BuyStock(GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), this.stockCount);
 
         //GameObject.Find("Main").GetComponent<MainScript>().useTired(1);
         //print("피로도 after use: " + GameObject.Find("Player").GetComponent<Player>().GetTired());
-        Player.player.SetMoney(Player.player.GetMoney() - this.stockPriceCaled);
+        //Player.player.SetMoney(Player.player.GetMoney() - this.stockPriceCaled);
+        GetComponent<SystemControl>().player.spendMoney(this.stockPriceCaled);
         this.refresh();
     }
 }

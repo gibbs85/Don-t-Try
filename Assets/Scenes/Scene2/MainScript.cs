@@ -46,7 +46,8 @@ public class MainScript : MonoBehaviour
 
     void Update()
     {
-        int Tired = Player.player.GetTired();
+        //int Tired = Player.player.GetTired();
+        int Tired = GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getFatigue();
         tired.text = "피로도 (" + Tired.ToString() + "/5)";
 
         ObjTired5.SetActive(false);
@@ -86,34 +87,34 @@ public class MainScript : MonoBehaviour
             ObjTired0.SetActive(true);
         }
 
-        int totalMoney = GameObject.Find("Stocks").GetComponent<Stocks>().MoneySellAll() + Player.player.Money;
+        int totalMoney = (int)(GameObject.Find("Stocks").GetComponent<Stocks>().MoneySellAll() + GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getMoney());
 
-        if ((DateEndGame - Date) == -1 || totalMoney <= 0)
-        {
-            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n어디보자. 섬강으로 갈까? 아니야 가까운 출렁다리로 가자\n내 인생이 그렇지 뭐");
-            if (Input.anyKeyDown)
-            {
-                SceneManager.LoadScene("BadEndingScene");
-            }
-        }
-        else if (totalMoney <= 1500000 && !showText150)
-        {
-            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n발이 왜이렇게 떨리지...?? 오르겠지..? 오를거야..그치?? 버티면돼.. 존버하자.");
-            showText150 = true;
-        }
-        else if (totalMoney >= 4000000 && !showText400)
-        {
-            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n물 겁나 들어올 때 노 겁나 저어야지!!! 더 사자 더!! 더!!!!");
-            showText400 = true;
-        }
-        else if (totalMoney >= 4500000)
-        {
-            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n성공!!!성공이라고!!!! 등록금을 내돈으로 낼 수 있어!!!");
-            if (Input.anyKeyDown)
-            {
-                SceneManager.LoadScene("HappyEndingScene");
-            }
-        }
+        //if ((DateEndGame - Date) == -1 || totalMoney <= 0)
+        //{
+        //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n어디보자. 섬강으로 갈까? 아니야 가까운 출렁다리로 가자\n내 인생이 그렇지 뭐");
+        //    if (Input.anyKeyDown)
+        //    {
+        //        SceneManager.LoadScene("BadEndingScene");
+        //    }
+        //}
+        //else if (totalMoney <= 1500000 && !showText150)
+        //{
+        //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n발이 왜이렇게 떨리지...?? 오르겠지..? 오를거야..그치?? 버티면돼.. 존버하자.");
+        //    showText150 = true;
+        //}
+        //else if (totalMoney >= 4000000 && !showText400)
+        //{
+        //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n물 겁나 들어올 때 노 겁나 저어야지!!! 더 사자 더!! 더!!!!");
+        //    showText400 = true;
+        //}
+        //else if (totalMoney >= 4500000)
+        //{
+        //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n성공!!!성공이라고!!!! 등록금을 내돈으로 낼 수 있어!!!");
+        //    if (Input.anyKeyDown)
+        //    {
+        //        SceneManager.LoadScene("HappyEndingScene");
+        //    }
+        //}
 
         if(Input.anyKeyDown)
         { 
@@ -133,11 +134,11 @@ public class MainScript : MonoBehaviour
     /////////////////////////////////////////////
     public bool useTired(int tired)
     {
-        int Tired = Player.player.GetTired();
+        int Tired = GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getFatigue();
         if (Tired < tired)
             return false;
         //Tired -= tired;
-        Player.player.SetTired(Tired - tired);
+        GameObject.Find("SystemControl").GetComponent<SystemControl>().player.exhaustFatigue(tired);
 
         return true;
     }
@@ -153,8 +154,8 @@ public class MainScript : MonoBehaviour
         GameObject.Find("Stocks").GetComponent<Stocks>().UpdateAllStocks(TimeTurns[Turn] - TimeTurns[Turn - 1]);
 
         //Tired = 5;
-        Player.player.SetTired(5);
-        int Tired = Player.player.GetTired();
+        //Player.player.SetTired(5);
+        int Tired = GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getFatigue();
 
         ObjTired5.SetActive(true);  //5번만 true
         ObjTired4.SetActive(false);
@@ -177,8 +178,8 @@ public class MainScript : MonoBehaviour
         Day++;
         if (Day == 6)   //만약 금요일이면
         {
-            Player.player.Money = Player.player.Money + Player.player.Saving + (int)(Player.player.Saving * 0.2);
-            Player.player.Saving = 0;
+            //Player.player.Money = Player.player.Money + Player.player.Saving + (int)(Player.player.Saving * 0.2);
+            //Player.player.Saving = 0;
         }
         else if (Day == 7) //7이면 0으로 변경
         {

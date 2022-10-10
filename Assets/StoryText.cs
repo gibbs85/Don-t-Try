@@ -10,6 +10,6 @@ public class StoryText : MonoBehaviour
     void Start()
     {
         TextMeshProUGUI t = gameObject.GetComponent<TextMeshProUGUI>();
-        t.text = t.text.Replace("/username/", Player.player.UserName);
+        t.text = t.text.Replace("/username/", GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getName());
     }
 }

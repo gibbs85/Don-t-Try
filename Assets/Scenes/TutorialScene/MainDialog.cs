@@ -6,20 +6,20 @@ using TMPro;
 
 public class MainDialog : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //}
 
-    public void ShowDialog(string text)
-    {
-        gameObject.SetActive(true);
+    //public void ShowDialog(string text)
+    //{
+    //    gameObject.SetActive(true);
 
-        transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = text.Replace("/username/", Player.player.UserName);
+    //    transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = text.Replace("/username/", Player.player.UserName);
 
-        //TextMeshProUGUI t = gameObject.GetComponent<TextMeshProUGUI>();
-        //t.text = t.text.Replace("/username/", UserInfo.user.UserName);
-    }
+    //    //TextMeshProUGUI t = gameObject.GetComponent<TextMeshProUGUI>();
+    //    //t.text = t.text.Replace("/username/", UserInfo.user.UserName);
+    //}
 }
 
 /*if (flag == 0)

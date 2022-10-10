@@ -59,135 +59,135 @@ public class MainManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (flag)
-        {
-            case 0:
-                {
-                    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n한번 연습이나 해보자!!");
-                    break;
-                }
-            case 1:
-                {
-                    // Enable App Highlight
-                    EnableAppHighlight(BankBtn.transform.position, AppScale);
+        //switch (flag)
+        //{
+        //    case 0:
+        //        {
+        //            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n한번 연습이나 해보자!!");
+        //            break;
+        //        }
+        //    case 1:
+        //        {
+        //            // Enable App Highlight
+        //            EnableAppHighlight(BankBtn.transform.position, AppScale);
 
-                    // Print Panel
-                    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n이 어플들은 뭐지?? 클릭해볼까?");
-                    break;
-                }
-            case 2:
-                {
-                    // Active Bank Screen
-                    ChangeScreen(BankScreen);
+        //            // Print Panel
+        //            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n이 어플들은 뭐지?? 클릭해볼까?");
+        //            break;
+        //        }
+        //    case 2:
+        //        {
+        //            // Active Bank Screen
+        //            ChangeScreen(BankScreen);
 
-                    // Print Panel
-                    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
-                        "이건 은행 어플이구나\n" +
-                        "지금 내가 넣어놓은 300만원이 들어있네!! 입출금도 자유롭고 심지어 이자도 있네??\n" +
-                        "이 시드머니로 등록금을 모아보는거야\n" +
-                        "적금...? 저건 토요일에만 열리나보다 나중에 다시 봐야겠는걸");
-                    break;
-                }
-            case 3:
-                {
-                    // Enable App Highlight
-                    EnableAppHighlight(HomeBtn.transform.position, PhoneUIScale);
+        //            // Print Panel
+        //            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
+        //                "이건 은행 어플이구나\n" +
+        //                "지금 내가 넣어놓은 300만원이 들어있네!! 입출금도 자유롭고 심지어 이자도 있네??\n" +
+        //                "이 시드머니로 등록금을 모아보는거야\n" +
+        //                "적금...? 저건 토요일에만 열리나보다 나중에 다시 봐야겠는걸");
+        //            break;
+        //        }
+        //    case 3:
+        //        {
+        //            // Enable App Highlight
+        //            EnableAppHighlight(HomeBtn.transform.position, PhoneUIScale);
 
-                    // Disable Panel
-                    talkPanel.SetActive(false);
+        //            // Disable Panel
+        //            talkPanel.SetActive(false);
 
-                    break;
-                }
-            case 4:
-                {
-                    // Active Default Screen
-                    ChangeScreen(DefaultScreen);
+        //            break;
+        //        }
+        //    case 4:
+        //        {
+        //            // Active Default Screen
+        //            ChangeScreen(DefaultScreen);
 
-                    // Enable App Highlight
-                    EnableAppHighlight(StockBtn.transform.position, AppScale);
+        //            // Enable App Highlight
+        //            EnableAppHighlight(StockBtn.transform.position, AppScale);
 
-                    // Print Panel
-                    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
-                        "이번엔 이걸 눌러보자");
+        //            // Print Panel
+        //            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
+        //                "이번엔 이걸 눌러보자");
 
-                    break;
-                }
-            case 5:
-                {
-                    // Active Default Screen
-                    ChangeScreen(StockScreen);
+        //            break;
+        //        }
+        //    case 5:
+        //        {
+        //            // Active Default Screen
+        //            ChangeScreen(StockScreen);
 
-                    // Print Panel
-                    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
-                        "이건 증권 어플이구나!\n" +
-                        "10개 종목 시세가 이렇게 한눈에 나오네!!\n" +
-                        "이걸 잘 보고 어디다 투자할지 정해야겠어!!");
+        //            // Print Panel
+        //            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
+        //                "이건 증권 어플이구나!\n" +
+        //                "10개 종목 시세가 이렇게 한눈에 나오네!!\n" +
+        //                "이걸 잘 보고 어디다 투자할지 정해야겠어!!");
 
-                    break;
-                }
-            case 6:
-                {
-                    // Enable App Highlight
-                    EnableAppHighlight(HomeBtn.transform.position, PhoneUIScale);
+        //            break;
+        //        }
+        //    case 6:
+        //        {
+        //            // Enable App Highlight
+        //            EnableAppHighlight(HomeBtn.transform.position, PhoneUIScale);
 
-                    // Disable Panel
-                    talkPanel.SetActive(false);
+        //            // Disable Panel
+        //            talkPanel.SetActive(false);
 
-                    break;
-                }
-            case 7:
-                {
-                    // Active Default Screen
-                    ChangeScreen(DefaultScreen);
+        //            break;
+        //        }
+        //    case 7:
+        //        {
+        //            // Active Default Screen
+        //            ChangeScreen(DefaultScreen);
 
-                    // Enable App Highlight
-                    EnableAppHighlight(SettingsBtn.transform.position, AppScale);
+        //            // Enable App Highlight
+        //            EnableAppHighlight(SettingsBtn.transform.position, AppScale);
 
-                    // Print Panel
-                    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
-                        "이건 환경설정이야!");
+        //            // Print Panel
+        //            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
+        //                "이건 환경설정이야!");
 
-                    break;
-                }
-            case 8:
-                {
-                    // Enable App Highlight
-                    ChangeScreen(DefaultScreen);
+        //            break;
+        //        }
+        //    case 8:
+        //        {
+        //            // Enable App Highlight
+        //            ChangeScreen(DefaultScreen);
 
-                    // Enable App Highlight
-                    EnableAppHighlight(SaveBtn.transform.position, AppScale);
+        //            // Enable App Highlight
+        //            EnableAppHighlight(SaveBtn.transform.position, AppScale);
 
-                    // Print Panel
-                    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
-                        "이건 내가 주식으로 돈 번 일기장이네");
+        //            // Print Panel
+        //            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
+        //                "이건 내가 주식으로 돈 번 일기장이네");
 
-                    break;
-                }
-            case 9:
-                {
-                    // Enable App Highlight
-                    ChangeScreen(DefaultScreen);
+        //            break;
+        //        }
+        //    case 9:
+        //        {
+        //            // Enable App Highlight
+        //            ChangeScreen(DefaultScreen);
 
-                    // Print Panel
-                    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
-                        "자!!! 모든 준비는 완벽하다!! 난 자신있어!!\n" +
-                        "화성 갈끄니까아~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        //            // Print Panel
+        //            talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n" +
+        //                "자!!! 모든 준비는 완벽하다!! 난 자신있어!!\n" +
+        //                "화성 갈끄니까아~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
-                    break;
-                }
-            case 10:
-                {
-                    isTutorial = false;
-                    SceneManager.LoadScene("Scene2");
-                    break;
-                }
-        }
+        //            break;
+        //        }
+        //    case 10:
+        //        {
+        //            isTutorial = false;
+        //            SceneManager.LoadScene("Scene2");
+        //            break;
+        //        }
+        //}
 
-        if (Input.anyKeyDown)
-        {
-            if (!appHighlighted && isTutorial)
-                flag++;
-        }
+        //if (Input.anyKeyDown)
+        //{
+        //    if (!appHighlighted && isTutorial)
+        //        flag++;
+        //}
     }
 
     private void ChangeScreen(GameObject newScreen)
