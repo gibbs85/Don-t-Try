@@ -64,7 +64,7 @@ public class World
         this.day++; // 요일 진행
         if (this.day > (int)DaysOfTheWeek.SUNDAY)
             this.day = (int)DaysOfTheWeek.MONDAY;
-        this.turn = 0; // 플레이가 시작되는 두 번째[9, '10', 13, 15] 턴
+        this.turn = 1; // 플레이가 시작되는 두 번째[9, '10', 13, 15] 턴
         this.time = this.timeTurns[this.turn];
 
         SystemControl.Instance.player.exhaustFatigue(-5);
@@ -79,13 +79,16 @@ public class World
     {
         this.turn++;
         if (this.turn >= this.timeTurns.Length)
+        {
             this.nextDay();
+        }
 
         this.time = this.timeTurns[this.turn];
         SystemControl.Instance.player.exhaustFatigue(1);
         SystemControl.Instance.stockControl.updateAllStocks(this.time - this.timeTurns[this.turn - 1]);//not sure
 
         UI_GamePlay.update_time();
+
     }
 
     public void addEventQueue(EventContainer anEvent)

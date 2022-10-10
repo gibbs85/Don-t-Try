@@ -69,7 +69,7 @@ public class ChartStock : MonoBehaviour
         this.getData();
 
         if(this.countDays == 1)
-            this.chartNrecords((GameObject.Find("Main").GetComponent<MainScript>().GetTime() - (int)(SettingsStock.TIME_START_OF_DAY))*(int)(SettingsStock.COUNT_UPDATE_PER_HOUR));
+            this.chartNrecords((SystemControl.Instance.world.getTime() - (int)(SettingsStock.TIME_START_OF_DAY))*(int)(SettingsStock.COUNT_UPDATE_PER_HOUR));
         //else
         //    this.chartNrecords((GameObject.Find("Player").GetComponent<Player>().GetTime() - (int)(SettingsStock.TIME_START_OF_DAY)) * (int)(SettingsStock.COUNT_UPDATE_PER_HOUR) + (      ((int)(SettingsStock.COUNT_UPDATE_PER_HOUR) * ((this.countDays-1)) * 6)     )   );
         else

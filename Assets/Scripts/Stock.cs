@@ -1,361 +1,185 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockDOGE
+public class Stock
 {
-    public class Stock
+    private int code;               // ÄÚµå
+    private string name;            // ÀÌ¸§
+    private string description;     // Á¾¸ñ ¼³¸í
+    private double price;            // °¡°İ
+    private LinkedList<double> recordPrice; // °¡°İ ±â·Ï
+    private LinkedList<double> recordWeight;    // °¡ÁßÄ¡ ±â·Ï
+    private double gaussMean;    // gaussian dist. ÀÇ Æò±Õ
+    private double gaussStd;     // gaussian dist. ÀÇ Ç¥ÁØÆíÂ÷
+
+    /*
+    public Stock(int code, string name, double initPrice);      // ¿Ï·á
+
+    private gaussianNum();                                      // ¿Ï·á
+    private gaussianNum(double mean, double std);               // ¿Ï·á
+    public double updateGaussian();                             // ¿Ï·á
+    public double updateForced();                               // ¿Ï·á
+
+
+    public int getCode();                                       // ¿Ï·á
+    public int getPrice();                                      // ¿Ï·á
+    public string getName();                                    // ¿Ï·á
+    public string getDesc();                                    // ¿Ï·á
+    public LinkedList<double> getRecordPrice();                 // ¿Ï·á
+    public LinkedList<double> getRecordWeight();                // ¿Ï·á
+    public int getLengthRecord();                               // ¿Ï·á
+    public void setName(string name);                           // ¿Ï·á
+    public void setDesc(string description);                    // ¿Ï·á
+    public void setMean(double newMean);                        // ¿Ï·á
+    public void setStd(double newStd);                          // ¿Ï·á
+    
+     */
+
+    public Stock(int code, string name, double initPrice)
     {
-        private string name;            // ì´ë¦„
-        private double price;            // ê°€ê²©
-        private double[] recordPrice;    // ê°€ê²© ê¸°ë¡
-        private double[] recordWeight;   // ê°€ì¤‘ì¹˜ ê¸°ë¡
-        private double gaussMean;    // gaussian dist. ì˜ í‰ê· 
-        private double gaussStd;     // gaussian dist. ì˜ í‘œì¤€í¸ì°¨
-        private int updateCount;        // ëª‡ ë²ˆ update ë˜ì—ˆëŠ”ì§€ count
-        private int recordLengthMAX;       // ê°€ê²©ê³¼ ê°€ì¤‘ì¹˜ë¥¼ ëª‡ ê°œê¹Œì§€ ê¸°ì–µí•˜ì—¬ (RNNì—) í™œìš©í•  ê±´ì§€ë¥¼ ëª…ì‹œì ìœ¼ë¡œ ì§€ì •í•˜ëŠ” ë³€ìˆ˜.
-        private string description;     // ì¢…ëª© ì„¤ëª…
+        this.code = code;
+        this.price = initPrice;
+        this.recordPrice = new LinkedList<double>();
+        this.recordPrice.AddLast(initPrice);
+        this.recordWeight = new LinkedList<double>();
+        this.recordWeight.AddLast(1.0);
 
-        /*/////////////////////////////////////////////////////////////////////
+        this.gaussMean = 1.0;
+        this.gaussStd = 0.005;
+
+        this.name = name;
+        this.description = "NO_DESCRIPTION";
+    }
+
+    public double updateGaussian()
+    {
+        /* 
+         * Gaussian ·£´ı º¯¼ö °¡ÁßÄ¡¸¦ »ı¼ºÇÏ¿© ´ÙÀ½ °¡°İ ¾÷µ¥ÀÌÆ®
          * 
-         * public functions are:
-         * 
-         *  double updateGaussian();      
-         *  double updateForced(double weight);  
-         *  double updateForced(double mean, double std)
-         *
-         *  string getName();
-         *  double getPrice();
-         *  double[] getPriceRecord();
-         *  double getMean();
-         *  double getStd();
-         *  
-         *  void setName(string newName);
-         *  void setMean(double newMean);
-         *  void setStd(double newStd);
-         *   
-         *  
-        *///////////////////////////////////////////////////////////////////////
+         */
+        double newWeight = this.gaussianNum();
 
-        /*/////////////////////////////////////////////////////////////////////
-         * 2022/05/20
-         * NOTE.
-         * 
-         * 
-         * RNN functions are disabled(private).
-         * 
-         * made some private attributes those don't have getter/setter functions in general
-         *  to have them.
-         * 
-         * changed the "update..." functions to return the updated values.
-         * 
-         *//////////////////////////////////////////////////////////////////////
+        this.price = this.price * newWeight;
 
+        //¾Æ·¡´Â recordPrice, recordWeight ¾÷µ¥ÀÌÆ®.
+        this.recordPrice.AddLast(this.price);
+        this.recordWeight.AddLast(newWeight);
 
-        public Stock(string name, double initPrice, int recordLengthMAX)
-        {
-            this.price = initPrice; //ì…ë ¥ë°›ì€ ì´ˆê¸° ê°€ê²©
-            this.recordPrice = new double[recordLengthMAX];    // ì…ë ¥ë°›ì€ recordLengthë§Œí¼ ê¸°ë¡ì„ ë‚¨ê¸°ê³  RNNì— ì‚¬ìš©
-            this.recordPrice[0] = this.price;
-            this.recordWeight = new double[recordLengthMAX];// ì…ë ¥ë°›ì€ recordLengthë§Œí¼ ê¸°ë¡ì„ ë‚¨ê¸°ê³  RNNì— ì‚¬ìš©
-            this.recordWeight[0] = 1;
-            this.updateCount = 1;
-            this.recordLengthMAX = recordLengthMAX;
+        return this.price;
+    }
 
-            this.gaussMean = 1;
-            this.gaussStd = 0.005;
-
-            this.name = name;
-            this.description = "NODESC";
-        }
-
-        public Stock(double initPrice, int recordLengthMAX)
-        {
-            this.price = initPrice; //ì…ë ¥ë°›ì€ ì´ˆê¸° ê°€ê²©
-            this.recordPrice = new double[recordLengthMAX];    // ì…ë ¥ë°›ì€ recordLengthë§Œí¼ ê¸°ë¡ì„ ë‚¨ê¸°ê³  RNNì— ì‚¬ìš©
-            this.recordPrice[0] = this.price;
-            this.recordWeight = new double[recordLengthMAX];// ì…ë ¥ë°›ì€ recordLengthë§Œí¼ ê¸°ë¡ì„ ë‚¨ê¸°ê³  RNNì— ì‚¬ìš©
-            this.recordWeight[0] = 1;
-            this.updateCount = 1;
-            this.recordLengthMAX = recordLengthMAX;
-
-            this.gaussMean = 1;
-            this.gaussStd = 0.005;
-
-            this.name = "NONAME";
-            this.description = "NODESC";
-        }
-        public Stock(string name, double initPrice)
-        {
-            this.price = initPrice;
-            this.recordPrice = new double[1];
-            this.recordPrice[0] = this.price;
-            this.recordWeight = new double[1];
-            this.recordWeight[0] = 1;
-            this.updateCount = 1;
-            this.recordLengthMAX = 1;
-
-            this.gaussMean = 1;
-            this.gaussStd = 0.005;
-
-            this.name = name;
-            this.description = "NODESC";
-        }
-
-        public Stock(double initPrice)
-        {
-            this.price = initPrice;
-            this.recordPrice = new double[1];
-            this.recordPrice[0] = this.price;
-            this.recordWeight = new double[1];
-            this.recordWeight[0] = 1;
-            this.updateCount = 1;
-            this.recordLengthMAX = 1;
-
-            this.gaussMean = 1;
-            this.gaussStd = 0.005;
-
-            this.name = "NONAME";
-            this.description = "NODESC";
-        }
-
-        //RNN ì—†ëŠ” ë²„ì „ì˜ update
-        public double updateGaussian()
-        {
-            /* 
-             * Gaussian ëœë¤ ë³€ìˆ˜ ê°€ì¤‘ì¹˜ë¥¼ ìƒì„±í•˜ì—¬ ë‹¤ìŒ ê°€ê²© ì—…ë°ì´íŠ¸
-             * 
-             */
-            double newWeight = this.gaussianNum();
-
-            this.price = this.price * newWeight;
-
-            //ì•„ë˜ëŠ” recordPrice, recordWeight ì—…ë°ì´íŠ¸. recordPriceì˜ lengthë§Œí¼ì˜ ìµœì‹  ê¸°ë¡ë§Œ ë‚¨ê¸´ë‹¤
-            updateRecordPrice(this.price);
-            updateRecordWeight(newWeight);
-
-            this.updateCount++;
-
-            return this.price;
-        }
-
-        public double updateForced(double weight)
-        {
-            /*
-             * ì¸ìˆ˜ë¡œ ë°›ì€ weightë¡œ ë‹¤ìŒ ê°€ê²© ì—…ë°ì´íŠ¸.
-             * 
-             */
-
-            this.price = this.price * weight;
-
-            updateRecordPrice(this.price);
-            updateRecordWeight(weight);
-
-            this.updateCount++;
-
-            return this.price;
-        }
-
-        public double updateForced(double mean, double std)
-        {
-            /*
-             * ì¸ìˆ˜ë¡œ ë°›ì€ meanê³¼ stdë¡œ gaussian ëœë¤ë³€ìˆ˜ ìƒì„±í•˜ì—¬ weightë¡œ ì‚¬ìš©, ë‹¤ìŒ ê°€ê²© ì—…ë°ì´íŠ¸.
-             * 
-             */
-            double weight = this.gaussianNum(mean, std);
-
-            this.price = this.price * weight;
-
-            updateRecordPrice(this.price);
-            updateRecordWeight(weight);
-
-            this.updateCount++;
-
-            return this.price;
-        }
-
-        private void updateRecordPrice(double newPrice)
-        {
-            if (this.updateCount >= this.recordLengthMAX)
-            {
-                this.arrayRotate(ref this.recordPrice, -1);
-                this.recordPrice[this.recordLengthMAX - 1] = newPrice;
-            }
-            else
-            {
-                this.recordPrice[this.updateCount] = newPrice;
-            }
-        }
-
-        private void updateRecordWeight(double newWeight)
-        {
-            if (this.updateCount >= this.recordLengthMAX)
-            {
-                this.arrayRotate(ref this.recordWeight, -1);
-                this.recordWeight[this.recordLengthMAX - 1] = newWeight;
-            }
-            else
-            {
-                this.recordWeight[this.updateCount] = newWeight;
-            }
-        }
-
-        private void updateByRNNonPrice()//ì•„ë§ˆë„ ì£¼ì‹ ê°€ê²©ì— ì í•©í• ë“¯
-        {
-            /*/////////////////////////////////////////////////////////////////////////
-             * 
-             * í˜„ì¬ê°€ê²© + (ì´ì „ ê°€ê²©ë“¤ì„ RNNí•œ ë‹¤ìŒ ì˜ˆì¸¡ ê°€ê²© * ìƒˆë¡œìš´ ëœë¤ ê°€ì¤‘ì¹˜)
-             * 
-             * ë˜ëŠ”, RNN ì˜ˆì¸¡ì¹˜ì˜ ë¹„ì¤‘ì„ ëŠ˜ë ¤
-             * 
-             * ì´ì „ ê°€ê²©ë“¤ì„ RNNí•œ ë‹¤ìŒ ì˜ˆì¸¡ ê°€ê²© + (í˜„ì¬ ê°€ê²© * ìƒˆë¡œìš´ ëœë¤ ê°€ì¤‘ì¹˜ /2)
-             * 
-             *//////////////////////////////////////////////////////////////////////////
-        }
-
-        private void updateByRNNonWeight()//ì•„ë§ˆë„ ì½”ì¸ ê°€ê²©ì— ì í•©í• ë“¯
-        {
-            /*//////////////////////////////////////////////////////////////////////////////////
-             * 
-             * í˜„ì¬ê°€ê²© + (ì´ì „ ê°€ì¤‘ì¹˜ë“¤ì„ RNNí•œ ë‹¤ìŒ ì˜ˆì¸¡ ê°€ì¤‘ì¹˜ + ìƒˆë¡œìš´ ëœë¤ ê°€ì¤‘ì¹˜)ì˜ ì¡°í•©(í‰ê· ) * í˜„ì¬ ê°€ê²©
-             * 
-             *//////////////////////////////////////////////////////////////////////////////////
-
-            this.price = this.price + (this.RNN(recordWeight) + this.gaussianNum()) / 2 * this.price;
-        }
-
-        private double RNN(double[] data)
-        {
-            return 0.0;
-        }
-
-        private double gaussianNum()
-        {
-            /*/////////////////////////////////////////////////////////////////////////
-             * í•´ë‹¹ ê°ì²´ì˜ gaussianMeanê³¼ gaussianStdë¥¼ ê°€ì§€ëŠ” gaussian dist. ë¥¼ í™•ë¥ ë°€ë„í•¨ìˆ˜ë¡œ í•˜ëŠ” ëœë¤ ìˆ˜ë¥¼ ë¦¬í„´
-             * 
-             * 
-             */////////////////////////////////////////////////////////////////////////
-            Random rand = new Random();
-            double u1 = 1.0 - rand.NextDouble();
-            double u2 = 1.0 - rand.NextDouble();
-            double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
-
-            /*
-             * ì˜ëª»ëœ mean, std ì„¤ì • ë“±ìœ¼ë¡œ ì¸í•´ weightê°€ ìŒìˆ˜ê°€ ë‚˜ì˜¤ëŠ” ê²½ìš°ë¥¼ ë§‰ê¸° ìœ„í•œ dirty solution
-             */
-            double result = this.gaussStd * (randStdNormal) + this.gaussMean;
-            if (result < 0)
-                result = 0;
-
-            return result;
-
-
-            //return this.gaussStd * (randStdNormal) + this.gaussMean;
-        }
-
-        private double gaussianNum(double mean, double std)
-        {
-            Random rand = new Random();
-            double u1 = 1.0 - rand.NextDouble();
-            double u2 = 1.0 - rand.NextDouble();
-            double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
-
-            double result = std * (randStdNormal) + mean;
-            if (result < 0)
-                result = 0;
-
-            return result;
-        }
-
-        private void arrayRotate<T>(ref T[] array, int shiftCount)
-        {
-            T[] backupArray = new T[array.Length];
-            for (int index = 0; index < array.Length; index++)
-            {
-                backupArray[(index + array.Length + shiftCount % array.Length) % array.Length] =
-                    array[index];
-            }
-            array = backupArray;
-        }
-
-        private double[] arrayMake(int nNumber)
-        {
-            double[] array = new double[nNumber];
-            for (int i = 0; i < nNumber; i++)
-            {
-                array[i] = i + 1;
-            }
-            return array;
-        }
-
-
+    public double updateForced(double weight)
+    {
         /*
-         * below are the setter/getter functions.
+         * ÀÎ¼ö·Î ¹ŞÀº weight·Î ´ÙÀ½ °¡°İ ¾÷µ¥ÀÌÆ®.
+         * 
          */
 
-        public double getPrice()
-        {
-            return this.price;
-        }
+        this.price = this.price * weight;
 
-        public int getUpdateCount()
-        {
-            return this.updateCount;
-        }
-        public string getName()
-        {
-            return this.name;
-        }
+        this.recordPrice.AddLast(this.price);
+        this.recordWeight.AddLast(weight);
 
-        public double[] getPriceRecord()
-        {
-            int count = this.updateCount;
-            if (count > this.recordPrice.Length)
-                count = this.recordPrice.Length;
-
-            double[] result = new double[count];
-            for (int i=0; i<count; i++)
-            {
-                result[i] = this.recordPrice[i];
-            }
-            return result;
-        }
-
-        public double getMean()
-        {
-            return this.gaussMean;
-        }
-
-        public double getStd()
-        {
-            return this.gaussStd;
-        }
-
-        public string getDesc()
-        {
-            return this.description;
-        }
-
-        public void setMean(double mean)
-        {
-            this.gaussMean = mean;
-        }
-
-        public void setStd(double std)
-        {
-            this.gaussStd = std;
-        }
-
-        public void setName(string newName)
-        {
-            this.name = newName;
-        }
-
-        public void setDesc(string description)
-        {
-            this.description = description;
-        }
-
+        return this.price;
     }
+
+    private double gaussianNum()
+    {
+        /*/////////////////////////////////////////////////////////////////////////
+        * ÇØ´ç °´Ã¼ÀÇ gaussianMean°ú gaussianStd¸¦ °¡Áö´Â gaussian dist. ¸¦ È®·ü¹ĞµµÇÔ¼ö·Î ÇÏ´Â ·£´ı ¼ö¸¦ ¸®ÅÏ
+        * 
+        * 
+        */////////////////////////////////////////////////////////////////////////
+        Random rand = new Random();
+        double u1 = 1.0 - rand.NextDouble();
+        double u2 = 1.0 - rand.NextDouble();
+        double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+
+        /*
+         * Àß¸øµÈ mean, std ¼³Á¤ µîÀ¸·Î ÀÎÇØ weight°¡ À½¼ö°¡ ³ª¿À´Â °æ¿ì¸¦ ¸·±â À§ÇÑ dirty solution
+         */
+        double result = this.gaussStd * (randStdNormal) + this.gaussMean;
+        if (result < 0)
+            result = 0;
+
+        return result;
+
+
+        //return this.gaussStd * (randStdNormal) + this.gaussMean;
+    }
+
+    private double gaussianNum(double mean, double std)
+    {
+        Random rand = new Random();
+        double u1 = 1.0 - rand.NextDouble();
+        double u2 = 1.0 - rand.NextDouble();
+        double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+
+        double result = std * (randStdNormal) + mean;
+        if (result < 0)
+            result = 0;
+
+        return result;
+    }
+
+    public int getCode()
+    {
+        return this.code;
+    }
+
+    public double getPrice()
+    {
+        return this.price;
+    }
+
+    public string getName()
+    {
+        return this.name;
+    }
+
+    public string getDesc()
+    {
+        return this.description;
+    }
+
+    public LinkedList<double> getRecordPrice()
+    {
+        return this.recordPrice;
+    }
+
+    public LinkedList<double> getRecordWeight()
+    {
+        return this.recordWeight;
+    }
+
+    public int getLengthRecord()
+    {
+        int count = this.recordPrice.Count;
+        return count;
+    }
+
+    public void setName(string name)
+    {
+        this.name = name;
+    }
+
+    public void setDesc(string description)
+    {
+        this.description = description;
+    }
+
+    public void setMean(double newMean)
+    {
+        this.gaussMean = newMean;
+    }
+
+    public void setStd(double newStd)
+    {
+        this.gaussStd = newStd;
+    }
+
+
+
+
 }

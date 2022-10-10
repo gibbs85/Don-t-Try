@@ -24,7 +24,9 @@ public class StockSellPage : MonoBehaviour
         this.stockName = GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getName();
         this.stockPrice = (int)(GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getPrice());
         this.stockCount = 0;
-        this.stockCountOwn = GameObject.Find("Stocks").GetComponent<Stocks>().CountOwn(this.stockName);
+
+        this.stockCountOwn = SystemControl.Instance.stockControl.getCountOwn(SystemControl.Instance.player.getCode(), SystemControl.Instance.stockControl.getStock(this.stockName).getCode());
+
         this.stockPriceCaled = 0;
         this.inputProcessed = "0";
 
@@ -46,7 +48,7 @@ public class StockSellPage : MonoBehaviour
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
 
         this.stockPriceCaled = this.stockPrice * this.stockCount;
-        this.stockCountOwn = GameObject.Find("Stocks").GetComponent<Stocks>().CountOwn(this.stockName);
+        this.stockCountOwn = SystemControl.Instance.stockControl.getCountOwn(SystemControl.Instance.player.getCode(), SystemControl.Instance.stockControl.getStock(this.stockName).getCode());
 
         GameObject.Find("StockSellPage").transform.Find("TextStockSellCount").GetComponentInChildren<TextMeshProUGUI>().text = this.stockCount + "주";
         GameObject.Find("StockSellPage").transform.Find("TextStockSellOwnCount").GetComponentInChildren<TextMeshProUGUI>().text = this.stockCountOwn + "주";
@@ -113,12 +115,12 @@ public class StockSellPage : MonoBehaviour
     {
         if (this.stockCount > this.stockCountOwn) // 판매할 수 있는 양 부족
             return;
-        if (GameObject.Find("Main").GetComponent<MainScript>().useTired(1) == false)
+        if (SystemControl.Instance.player.exhaustFatigue(1) == false)
             return;
 
-        GameObject.Find("Stocks").GetComponent<Stocks>().SellStock(GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock(), this.stockCount);
+        SystemControl.Instance.stockControl.sellStock(SystemControl.Instance.player, GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getCode(), this.stockCount);
         //Player.player.SetMoney(Player.player.GetMoney() + this.stockPriceCaled);
-        GameObject.Find("SystemControl").GetComponent<SystemControl>().player.spendMoney(-this.stockPriceCaled);
+        //GameObject.Find("SystemControl").GetComponent<SystemControl>().player.spendMoney(-this.stockPriceCaled);
         this.refresh();
     }
 }

@@ -20,14 +20,16 @@ public class OpenAppSaving : MonoBehaviour
 
     public void OpeningApp()
     {
-        int Day = GameObject.Find("Main").GetComponent<MainScript>().GetDay();
+        //int Day = GameObject.Find("Main").GetComponent<MainScript>().GetDay();
+        int Day = SystemControl.Instance.world.getDay();
         if (Day == 0)
             appOpen.SetActive(true);
     }
 
     public void ClosingApp()
     {
-        int Day = GameObject.Find("Main").GetComponent<MainScript>().GetDay();
+        //int Day = GameObject.Find("Main").GetComponent<MainScript>().GetDay();
+        int Day = SystemControl.Instance.world.getDay();
         if (Day == 0)
             appOpen.SetActive(true);
     }

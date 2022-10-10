@@ -24,6 +24,7 @@ public class StockDetailScript : MonoBehaviour
 
     public Stock getStock()
     {
-        return GameObject.Find("Stocks").GetComponent<Stocks>().getStockByName(this.stockName);
+        return (SystemControl.Instance.stockControl.getStock(this.stockName));
+        //return GameObject.Find("Stocks").GetComponent<Stocks>().getStockByName(this.stockName);
     }
 }

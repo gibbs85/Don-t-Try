@@ -12,17 +12,19 @@ using System.Linq;
 //    TIME_END_OF_DAY = 15
 //}
 
+
+
+public struct StockBought
+{
+    public int playerCode;
+    public int stockCode;
+    public double price;
+}
+
 public class StockControl
 {
-    private List<StockV2> stocks;
+    private List<Stock> stocks;
     private List<StockBought> stocksOwned;
-
-    private struct StockBought
-    {
-        public int playerCode;
-        public int stockCode;
-        public double price;
-    }
 
     /*
     
@@ -46,26 +48,29 @@ public class StockControl
     public Stock getStock(string stockName);
     public LinkedList<double> getRecordDay(int stockCode, int time);
     public double getRateDay(int stockCode, int time);
+    public int getCountStocks();
+    public Stock getStockAt(int index);
+    public List<StockBought> getListStocksOwn(int playerCode);
 
      */
 
     public StockControl()
     {
-        this.stocks = new List<StockV2>();
+        this.stocks = new List<Stock>();
         this.stocksOwned = new List<StockBought>();
     }
 
     public void new_game()
     {
-        StockV2 stockSamsung = new StockV2(100, "사성전자", 68000);
-        StockV2 stockKakao = new StockV2(101, "까까오", 83000);
-        StockV2 stockHyundai = new StockV2(102, "현재자동차", 186500);
-        StockV2 stockSk = new StockV2(103, "애스끼텔레콤", 58200);
-        StockV2 stockLg = new StockV2(104, "헬지화학", 545000);
-        StockV2 stockApple = new StockV2(105, "아플", 175254);
-        StockV2 stockNaver = new StockV2(106, "네버", 275000);
-        StockV2 stockGoogle = new StockV2(107, "구귤", 2774420);
-        StockV2 stockMeta = new StockV2(108, "MEKA", 50000);
+        Stock stockSamsung = new Stock(100, "사성전자", 68000);
+        Stock stockKakao = new Stock(101, "까까오", 83000);
+        Stock stockHyundai = new Stock(102, "현재자동차", 186500);
+        Stock stockSk = new Stock(103, "애스끼텔레콤", 58200);
+        Stock stockLg = new Stock(104, "헬지화학", 545000);
+        Stock stockApple = new Stock(105, "아플", 175254);
+        Stock stockNaver = new Stock(106, "네버", 275000);
+        Stock stockGoogle = new Stock(107, "구귤", 2774420);
+        Stock stockMeta = new Stock(108, "MEKA", 50000);
 
         this.stocks.Add(stockSamsung);
         this.stocks.Add(stockKakao);
@@ -115,7 +120,7 @@ public class StockControl
          *
          *//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        foreach(StockV2 stock in this.stocks)
+        foreach(Stock stock in this.stocks)
         {
             for (int j = 0; j < (int)SettingsStock.COUNT_UPDATE_PER_HOUR * (int)SettingsStock.COUNT_HOUR_PER_DAY * (int)SettingsStock.COUNT_UPDATE_DAYS_PREPLAY; j++)
             {
@@ -160,12 +165,12 @@ public class StockControl
         return this.stocksOwned.Where(stockbought => (stockbought.stockCode == stockCode) && (stockbought.playerCode == playerCode) ).Count();
     }
 
-    public StockV2 getStock(int stockCode)
+    public Stock getStock(int stockCode)
     {
         return this.stocks.Find(stock => stock.getCode() == stockCode);
     }
 
-    public StockV2 getStock(string stockName)
+    public Stock getStock(string stockName)
     {
         return this.stocks.Find(stock => stock.getName() == stockName);
     }
@@ -183,9 +188,22 @@ public class StockControl
         return money;
     }
 
+
+    public double getMoneyBought(int playerCode, int stockCode)
+    {
+        double money = 0;
+
+        foreach (StockBought stockbought in (this.stocksOwned.FindAll(stockbought => (stockbought.playerCode == playerCode) && (stockbought.stockCode == stockCode))))
+        {
+            money += stockbought.price;
+        }
+
+        return money;
+    }
+
     public void updateAllStocks(int timeInterval)
     {
-        foreach (StockV2 stock in this.stocks)
+        foreach (Stock stock in this.stocks)
         {
             for (int j = 0; j < (int)SettingsStock.COUNT_UPDATE_PER_HOUR * timeInterval; j++)
             {
@@ -223,7 +241,9 @@ public class StockControl
     //public LinkedList<double> getRecordDay(int stockCode, int time)
     public double[] getRecordDay(int stockCode, int time)
     {
-        StockV2 stock = this.getStock(stockCode);
+        //Debug.Log("StockControl.cs.244 : getRecordDay : " + "Initiated");
+
+        Stock stock = this.getStock(stockCode);
         double[] result;
 
         int lengthRecord = this.getStock(stockCode).getLengthRecord();
@@ -236,8 +256,15 @@ public class StockControl
         result = new double[lengthRecordtoCut];
         for (int i = 0; i < lengthRecordtoCut; i++)
         {
-            result[^(i + 1)] = stock.getRecordPrice().ElementAt(lengthRecordtoCut-1);
+            result[^(i + 1)] = stock.getRecordPrice().ElementAt(lengthRecordtoCut-1-i);
         }
+
+        Debug.Log("StockControl.cs.262 : getRecordDay.stockCode : " + stockCode);
+        Debug.Log("StockControl.cs.263 : getRecordDay.stockCode_found : " + stock.getCode());
+        Debug.Log("StockControl.cs.262 : getRecordDay.lengthRecordToCut : " + lengthRecordtoCut);
+        Debug.Log("StockControl.cs.262 : getRecordDay.result.[1] : " + result[1]);
+        Debug.Log("StockControl.cs.262 : getRecordDay.result.[^1] : " + result[^1]);
+
 
         return result;
 
@@ -255,6 +282,40 @@ public class StockControl
         rate = ((priceNow - priceStart) / priceStart) * 100;
 
         return rate;
+    }
+
+
+    public int getCountStocks()
+    {
+        return this.stocks.Count;
+    }
+
+
+    public Stock getStockAt(int index)
+    {
+        return this.stocks.ElementAt(index);
+    }
+
+    public List<StockBought> getListStocksOwn(int playerCode)
+    {
+        List<StockBought> listOwned = new List<StockBought>();
+        listOwned = this.stocksOwned.FindAll(stockbought => stockbought.playerCode == playerCode);
+        return listOwned;
+    }
+
+    public List<StockBought> getListStocksOwnMerged(int playerCode)
+    {
+        List<StockBought> listOwned = this.getListStocksOwn(playerCode);
+
+        //listOwned = listOwned.DistinctBy(stockbought => stockbought.stockCode);
+
+        List<StockBought> listMerged =
+            listOwned
+            .GroupBy(stock => stock.stockCode)
+            .Select(kind => kind.First())
+            .ToList();
+
+        return listMerged;
     }
 
 
