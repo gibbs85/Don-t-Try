@@ -44,83 +44,83 @@ public class MainScript : MonoBehaviour
         InitPlay();
     }
 
-    //void Update()
-    //{
-    //    //int Tired = Player.player.GetTired();
-    //    int Tired = GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getFatigue();
-    //    tired.text = "피로도 (" + Tired.ToString() + "/5)";
+    void Update()
+    {
+        //int Tired = Player.player.GetTired();
+        int Tired = GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getFatigue();
+        tired.text = "피로도 (" + Tired.ToString() + "/5)";
 
-    //    ObjTired5.SetActive(false);
-    //    ObjTired4.SetActive(false);
-    //    ObjTired3.SetActive(false);
-    //    ObjTired2.SetActive(false);
-    //    ObjTired1.SetActive(false);
-    //    ObjTired0.SetActive(false);
+        ObjTired5.SetActive(false);
+        ObjTired4.SetActive(false);
+        ObjTired3.SetActive(false);
+        ObjTired2.SetActive(false);
+        ObjTired1.SetActive(false);
+        ObjTired0.SetActive(false);
 
-    //    if (Tired == 5)
-    //    {
-    //        ObjTired5.SetActive(true);
-    //    }
-    //    else if (Tired == 4)
-    //    {
-    //        ObjTired5.SetActive(false);
-    //        ObjTired4.SetActive(true);
-    //    }
-    //    else if (Tired == 3)
-    //    {
-    //        ObjTired4.SetActive(false);
-    //        ObjTired3.SetActive(true);
-    //    }
-    //    else if (Tired == 2)
-    //    {
-    //        ObjTired3.SetActive(false);
-    //        ObjTired2.SetActive(true);
-    //    }
-    //    else if (Tired == 1)
-    //    {
-    //        ObjTired2.SetActive(false);
-    //        ObjTired1.SetActive(true);
-    //    }
-    //    else if (Tired == 0)
-    //    {
-    //        ObjTired1.SetActive(false);
-    //        ObjTired0.SetActive(true);
-    //    }
+        if (Tired == 5)
+        {
+            ObjTired5.SetActive(true);
+        }
+        else if (Tired == 4)
+        {
+            ObjTired5.SetActive(false);
+            ObjTired4.SetActive(true);
+        }
+        else if (Tired == 3)
+        {
+            ObjTired4.SetActive(false);
+            ObjTired3.SetActive(true);
+        }
+        else if (Tired == 2)
+        {
+            ObjTired3.SetActive(false);
+            ObjTired2.SetActive(true);
+        }
+        else if (Tired == 1)
+        {
+            ObjTired2.SetActive(false);
+            ObjTired1.SetActive(true);
+        }
+        else if (Tired == 0)
+        {
+            ObjTired1.SetActive(false);
+            ObjTired0.SetActive(true);
+        }
 
-    //    int totalMoney = (int)(GameObject.Find("Stocks").GetComponent<Stocks>().MoneySellAll() + GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getMoney());
+        int totalMoney = (int)(GameObject.Find("Stocks").GetComponent<Stocks>().MoneySellAll() + GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getMoney());
 
-    //    //if ((DateEndGame - Date) == -1 || totalMoney <= 0)
-    //    //{
-    //    //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n어디보자. 섬강으로 갈까? 아니야 가까운 출렁다리로 가자\n내 인생이 그렇지 뭐");
-    //    //    if (Input.anyKeyDown)
-    //    //    {
-    //    //        SceneManager.LoadScene("BadEndingScene");
-    //    //    }
-    //    //}
-    //    //else if (totalMoney <= 1500000 && !showText150)
-    //    //{
-    //    //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n발이 왜이렇게 떨리지...?? 오르겠지..? 오를거야..그치?? 버티면돼.. 존버하자.");
-    //    //    showText150 = true;
-    //    //}
-    //    //else if (totalMoney >= 4000000 && !showText400)
-    //    //{
-    //    //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n물 겁나 들어올 때 노 겁나 저어야지!!! 더 사자 더!! 더!!!!");
-    //    //    showText400 = true;
-    //    //}
-    //    //else if (totalMoney >= 4500000)
-    //    //{
-    //    //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n성공!!!성공이라고!!!! 등록금을 내돈으로 낼 수 있어!!!");
-    //    //    if (Input.anyKeyDown)
-    //    //    {
-    //    //        SceneManager.LoadScene("HappyEndingScene");
-    //    //    }
-    //    //}
+        //if ((DateEndGame - Date) == -1 || totalMoney <= 0)
+        //{
+        //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n어디보자. 섬강으로 갈까? 아니야 가까운 출렁다리로 가자\n내 인생이 그렇지 뭐");
+        //    if (Input.anyKeyDown)
+        //    {
+        //        SceneManager.LoadScene("BadEndingScene");
+        //    }
+        //}
+        //else if (totalMoney <= 1500000 && !showText150)
+        //{
+        //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n발이 왜이렇게 떨리지...?? 오르겠지..? 오를거야..그치?? 버티면돼.. 존버하자.");
+        //    showText150 = true;
+        //}
+        //else if (totalMoney >= 4000000 && !showText400)
+        //{
+        //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n물 겁나 들어올 때 노 겁나 저어야지!!! 더 사자 더!! 더!!!!");
+        //    showText400 = true;
+        //}
+        //else if (totalMoney >= 4500000)
+        //{
+        //    talkPanel.GetComponent<MainDialog>().ShowDialog("/username/\n\n성공!!!성공이라고!!!! 등록금을 내돈으로 낼 수 있어!!!");
+        //    if (Input.anyKeyDown)
+        //    {
+        //        SceneManager.LoadScene("HappyEndingScene");
+        //    }
+        //}
 
-    //    if(Input.anyKeyDown)
-    //    { 
-    //        talkPanel.SetActive(false);
-    //    }
-    //}
+        if(Input.anyKeyDown)
+        { 
+            talkPanel.SetActive(false);
+        }
+    }
     public int GetTime()
     {
         return Time;

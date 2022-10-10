@@ -71,8 +71,6 @@ public class World
         UI_GamePlay.update_time();
         UI_GamePlay.update_date();
 
-        //GameObject.Find("Player").GetComponent<Player>().UpdateAllStocks(-5); // 플레이어 피로도 회복 
-
         // nextTurn으로 복귀
     }
 
@@ -88,7 +86,6 @@ public class World
 
         UI_GamePlay.update_time();
         //GameObject.Find("StockControl").GetComponent<Stocks>().UpdateAllStocks(this.time - this.timeTurns[this.turn - 1]); // 주식 업데이트
-        //this.refresh(); // 
     }
 
     public void addEventQueue(EventContainer anEvent)
