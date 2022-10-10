@@ -67,6 +67,7 @@ public class Player
         else
         {
             this.fatigue = this.fatigue - fatigue;
+            UI_GamePlay.update_fatigue();
             return true;
         }
     }

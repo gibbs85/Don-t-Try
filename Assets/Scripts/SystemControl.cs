@@ -47,6 +47,7 @@ public class SystemControl : MonoBehaviour
         Debug.Log("SystemControl new_game() called.");
         this.player = new Player(1911);
         this.world = new World();
+        this.world.init();
     }
 
 

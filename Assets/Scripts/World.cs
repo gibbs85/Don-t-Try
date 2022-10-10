@@ -66,6 +66,11 @@ public class World
             this.day = (int)DaysOfTheWeek.MONDAY;
         this.turn = 0; // 플레이가 시작되는 두 번째[9, '10', 13, 15] 턴
         this.time = this.timeTurns[this.turn];
+
+        SystemControl.Instance.player.exhaustFatigue(-5);
+        UI_GamePlay.update_time();
+        UI_GamePlay.update_date();
+
         //GameObject.Find("Player").GetComponent<Player>().UpdateAllStocks(-5); // 플레이어 피로도 회복 
 
         // nextTurn으로 복귀
@@ -79,6 +84,9 @@ public class World
             this.nextDay();
 
         this.time = this.timeTurns[this.turn];
+        SystemControl.Instance.player.exhaustFatigue(1);
+
+        UI_GamePlay.update_time();
         //GameObject.Find("StockControl").GetComponent<Stocks>().UpdateAllStocks(this.time - this.timeTurns[this.turn - 1]); // 주식 업데이트
         //this.refresh(); // 
     }
