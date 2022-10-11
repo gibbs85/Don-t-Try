@@ -103,20 +103,18 @@ public class StockBuyPage : MonoBehaviour
 
     public void BuyConfirmClicked()
     {
-        print("피로도: " + GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getFatigue());
-        if (this.stockPriceCaled > GetComponent<SystemControl>().player.getMoney()) // 구매할 돈 없음
+        if (this.stockPriceCaled > SystemControl.Instance.player.getMoney()) // 구매할 돈 없음
             return;
 
         if (SystemControl.Instance.player.exhaustFatigue(1) == false)
             return;
-        print("피로도 after if: " + GetComponent<SystemControl>().player.getFatigue());
 
         SystemControl.Instance.stockControl.buyStock(SystemControl.Instance.player, GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getCode(), this.stockCount);
 
         //GameObject.Find("Main").GetComponent<MainScript>().useTired(1);
         //print("피로도 after use: " + GameObject.Find("Player").GetComponent<Player>().GetTired());
         //Player.player.SetMoney(Player.player.GetMoney() - this.stockPriceCaled);
-        GetComponent<SystemControl>().player.spendMoney(this.stockPriceCaled);
+        SystemControl.Instance.player.spendMoney(this.stockPriceCaled);
         this.refresh();
     }
 }
