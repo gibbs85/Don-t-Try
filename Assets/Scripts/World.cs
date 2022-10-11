@@ -84,7 +84,6 @@ public class World
         }
 
         this.time = this.timeTurns[this.turn];
-        SystemControl.Instance.player.exhaustFatigue(1);
         SystemControl.Instance.stockControl.updateAllStocks(this.time - this.timeTurns[this.turn - 1]);//not sure
 
         UI_GamePlay.update_time();

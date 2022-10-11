@@ -11,6 +11,7 @@ public class Player
     private double saving;  // 예금
     private double investment;  // 주식 등 투자된 금액
     private int fatigue;    // 피로도
+    private int fatigueMax; // 피로도 최대치
 
     /*
     public void init(int code)                  // 완료
@@ -46,6 +47,7 @@ public class Player
         this.saving = 0;
         this.investment = 0;
         this.fatigue = 5;
+        this.fatigueMax = 5;
     }
 
     public bool spendMoney(double money)
@@ -69,6 +71,8 @@ public class Player
         else
         {
             this.fatigue = this.fatigue - fatigue;
+            if (this.fatigue > this.fatigueMax)
+                this.fatigue = this.fatigueMax;
             UI_GamePlay.update_fatigue();
             return true;
         }
