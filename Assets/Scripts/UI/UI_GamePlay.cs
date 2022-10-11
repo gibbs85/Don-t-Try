@@ -11,6 +11,7 @@ public class UI_GamePlay : MonoBehaviour
         update_date();
         update_time();
         update_fatigue();
+        update_money();
     }
 
     public static void update_fatigue()
@@ -80,6 +81,14 @@ public class UI_GamePlay : MonoBehaviour
         GameObject.Find("UI").transform.Find("Date").GetComponent<Text>().text =
             date.ToString() + "일 째";
 
+    }
+
+    public static void update_money()
+    {
+        int money = (int)(SystemControl.Instance.player.getMoney());//이후 utilNum 활용 필요
+
+        GameObject.Find("UI").transform.Find("Money").GetComponent<Text>().text =
+            money.ToString() + "원";
     }
 
     public void btn_nextTurn()

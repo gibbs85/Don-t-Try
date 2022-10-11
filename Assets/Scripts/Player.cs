@@ -56,6 +56,7 @@ public class Player
         else
         {
             this.money = this.money - money;
+            UI_GamePlay.update_money();
             return true;
         }
     }
