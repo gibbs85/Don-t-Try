@@ -241,7 +241,7 @@ public class StockControl
     //public LinkedList<double> getRecordDay(int stockCode, int time)
     public double[] getRecordDay(int stockCode, int time)
     {
-        //Debug.Log("StockControl.cs.244 : getRecordDay : " + "Initiated");
+        Debug.Log("StockControl.cs.244 : getRecordDay : " + "Initiated");
 
         Stock stock = this.getStock(stockCode);
         double[] result;
@@ -256,14 +256,20 @@ public class StockControl
         result = new double[lengthRecordtoCut];
         for (int i = 0; i < lengthRecordtoCut; i++)
         {
-            result[^(i + 1)] = stock.getRecordPrice().ElementAt(lengthRecordtoCut-1-i);
+            //result[^(i + 1)] = stock.getRecordPrice().ElementAt(lengthRecordtoCut-1-i);
+            result[^(i + 1)] = stock.getRecordPrice().ElementAt(stock.getLengthRecord() - 1 - i);
         }
 
         //Debug.Log("StockControl.cs.262 : getRecordDay.stockCode : " + stockCode);
         //Debug.Log("StockControl.cs.263 : getRecordDay.stockCode_found : " + stock.getCode());
         //Debug.Log("StockControl.cs.262 : getRecordDay.lengthRecordToCut : " + lengthRecordtoCut);
+        //Debug.Log("StockControl.cs.262 : getRecordDay.result.[0] : " + result[0]);
         //Debug.Log("StockControl.cs.262 : getRecordDay.result.[1] : " + result[1]);
+        //Debug.Log("StockControl.cs.262 : getRecordDay.result.[2] : " + result[2]);
+        //Debug.Log("StockControl.cs.262 : getRecordDay.result.[^1] : " + result[^3]);
+        //Debug.Log("StockControl.cs.262 : getRecordDay.result.[^1] : " + result[^2]);
         //Debug.Log("StockControl.cs.262 : getRecordDay.result.[^1] : " + result[^1]);
+        //2022-10-12-02:01. 마지막 하루 치 데이터가 아닌 최초 하루치 데이터를 부르고 있음. => 해결.
 
 
         return result;
