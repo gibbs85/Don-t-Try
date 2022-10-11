@@ -105,12 +105,12 @@ public class ChartStock : MonoBehaviour
         }
         this.data = dataArray;
 
-        Debug.Log("lengthData : " + lengthData);
-        Debug.Log("lengthArray : " + dataArray.Length);
-        Debug.Log("1st data : " + dataArray[0]);
-        Debug.Log("2nd data : " + dataArray[1]);
-        Debug.Log("last-1 data : " + dataArray[lengthData - 2]);
-        Debug.Log("last data : " + dataArray[lengthData-1]);
+        //Debug.Log("lengthData : " + lengthData);
+        //Debug.Log("lengthArray : " + dataArray.Length);
+        //Debug.Log("1st data : " + dataArray[0]);
+        //Debug.Log("2nd data : " + dataArray[1]);
+        //Debug.Log("last-1 data : " + dataArray[lengthData - 2]);
+        //Debug.Log("last data : " + dataArray[lengthData-1]);
 
         //this.data = GameObject.Find("Stocks").GetComponent<Stocks>().getStockByName(stockName).getPriceRecord();
     }

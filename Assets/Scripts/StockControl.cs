@@ -259,11 +259,11 @@ public class StockControl
             result[^(i + 1)] = stock.getRecordPrice().ElementAt(lengthRecordtoCut-1-i);
         }
 
-        Debug.Log("StockControl.cs.262 : getRecordDay.stockCode : " + stockCode);
-        Debug.Log("StockControl.cs.263 : getRecordDay.stockCode_found : " + stock.getCode());
-        Debug.Log("StockControl.cs.262 : getRecordDay.lengthRecordToCut : " + lengthRecordtoCut);
-        Debug.Log("StockControl.cs.262 : getRecordDay.result.[1] : " + result[1]);
-        Debug.Log("StockControl.cs.262 : getRecordDay.result.[^1] : " + result[^1]);
+        //Debug.Log("StockControl.cs.262 : getRecordDay.stockCode : " + stockCode);
+        //Debug.Log("StockControl.cs.263 : getRecordDay.stockCode_found : " + stock.getCode());
+        //Debug.Log("StockControl.cs.262 : getRecordDay.lengthRecordToCut : " + lengthRecordtoCut);
+        //Debug.Log("StockControl.cs.262 : getRecordDay.result.[1] : " + result[1]);
+        //Debug.Log("StockControl.cs.262 : getRecordDay.result.[^1] : " + result[^1]);
 
 
         return result;

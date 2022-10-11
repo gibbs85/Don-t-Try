@@ -14,7 +14,7 @@ public class Change_Image : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        print("started");
+        //print("started");
         //int money = Player.player.GetMoney();
         int money = (int)(GameObject.Find("SystemControl").GetComponent<SystemControl>().player.getMoney());
 

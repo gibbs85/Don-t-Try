@@ -41,15 +41,16 @@ public class SecuritiesStockListAll : MonoBehaviour
         
         for (int i = 0; i < SystemControl.Instance.stockControl.getCountStocks(); i++)
         {
-            Debug.Log("SecuritiesStockListAll.cs.44 : code :" + SystemControl.Instance.stockControl.getStockAt(i).getCode());
-            Debug.Log("SecuritiesStockListAll.cs.45 : index :" + i);
+            //Debug.Log("SecuritiesStockListAll.cs.44 : code :" + SystemControl.Instance.stockControl.getStockAt(i).getCode());
+            //Debug.Log("SecuritiesStockListAll.cs.45 : index :" + i);
             double rate = SystemControl.Instance.stockControl.getRateDay(SystemControl.Instance.stockControl.getStockAt(i).getCode(), SystemControl.Instance.world.getTime());
             //Debug.Log("SecuritiesStockListAll.cs.45 : name : " + SystemControl.Instance.stockControl.getStockAt(i).getName());
             //Debug.Log("SecuritiesStockListAll.cs.46 : rate : " + rate);
             //double rate = GameObject.Find("Stocks").GetComponent<Stocks>().getRateDay(GameObject.Find("Stocks").GetComponent<Stocks>().getStockByIndex(i), GameObject.Find("Main").GetComponent<MainScript>().GetTime());
 
             GameObject btn = Resources.Load<GameObject>("Prefabs/StockButtonContentListAll");
-            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("StockListAll").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+            //GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("StockListAll").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("AppStock").transform.Find("StockListAll").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
             Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = SystemControl.Instance.stockControl.getStockAt(i).getName();
             Instance.transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().text = (SystemControl.Instance.stockControl.getStockAt(i)).getPrice().ToString("c", numberFormat)
                 + "(" + rate.ToString("F2") + "%)";

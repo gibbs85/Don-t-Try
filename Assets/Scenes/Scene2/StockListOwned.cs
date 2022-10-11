@@ -15,11 +15,13 @@ public class StockListOwned : MonoBehaviour
 
     public void init()
     {
+        //Debug.Log("StockListOwned.init()");
         this.refresh();
     }
 
     void OnEnable()
     {
+        //Debug.Log("StockListOwned.OnEnable()");
         this.refresh();
     }
 
@@ -30,6 +32,7 @@ public class StockListOwned : MonoBehaviour
 
     public void refresh()
     {
+        //Debug.Log("StockListOwned.refresh()");
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
 
         this.moneySpentAll = SystemControl.Instance.stockControl.getMoneyBought(SystemControl.Instance.player.getCode());
@@ -80,7 +83,9 @@ public class StockListOwned : MonoBehaviour
             double rateDay = SystemControl.Instance.stockControl.getRateDay(stock.getCode(), SystemControl.Instance.world.getTime());
 
             GameObject btn = Resources.Load<GameObject>("Prefabs/BtnContentStockListOwn");
-            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("Viewport").transform.Find("Content"));
+            //GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("Viewport").transform.Find("Content"));
+            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("AppStock").transform.Find("StockListOwned").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+            //Debug.Log("Instanciated.");
             Instance.transform.Find("TextStockListOwnName").GetComponentInChildren<TextMeshProUGUI>().text = name;
             Instance.transform.Find("TextStockListOwnPrice").GetComponentInChildren<TextMeshProUGUI>().text = price.ToString("c", numberFormat) + "(" + rateDay.ToString("F2") + "%)";
             Instance.transform.Find("TextStockListOwnAvg").GetComponentInChildren<TextMeshProUGUI>().text = "내 평단가: " + avg.ToString("c", numberFormat);
