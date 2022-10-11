@@ -148,10 +148,20 @@ public class StockControl
         double price = this.getPrice(stockCode) * count;
         player.spendMoney(-price);
 
-        for (int i=0; i<count; i++)
+        int playerCode = player.getCode();
+        int iter = 0;
+        foreach(StockBought stockbought in (this.stocksOwned.FindAll(stockbought => (stockbought.playerCode == playerCode) && (stockbought.stockCode == stockCode))))
         {
-            this.stocksOwned.Remove(stocksOwned.Single(stockbought => (stockbought.stockCode == stockCode) && (stockbought.playerCode == player.getCode())));
+            if (iter == count)
+                break;
+
+            this.stocksOwned.Remove(stockbought);
+            Debug.Log("DELETED.");
+
+            iter++;
         }
+
+
 
     }
 
@@ -241,7 +251,7 @@ public class StockControl
     //public LinkedList<double> getRecordDay(int stockCode, int time)
     public double[] getRecordDay(int stockCode, int time)
     {
-        Debug.Log("StockControl.cs.244 : getRecordDay : " + "Initiated");
+        //Debug.Log("StockControl.cs.244 : getRecordDay : " + "Initiated");
 
         Stock stock = this.getStock(stockCode);
         double[] result;

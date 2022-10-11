@@ -114,7 +114,7 @@ public class StockBuyPage : MonoBehaviour
         //GameObject.Find("Main").GetComponent<MainScript>().useTired(1);
         //print("ÇÇ·Îµµ after use: " + GameObject.Find("Player").GetComponent<Player>().GetTired());
         //Player.player.SetMoney(Player.player.GetMoney() - this.stockPriceCaled);
-        SystemControl.Instance.player.spendMoney(this.stockPriceCaled);
+        //SystemControl.Instance.player.spendMoney(this.stockPriceCaled);
         this.refresh();
     }
 }

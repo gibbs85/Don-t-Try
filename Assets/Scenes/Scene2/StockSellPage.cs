@@ -21,7 +21,8 @@ public class StockSellPage : MonoBehaviour
     {
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
 
-        this.stockName = GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getName();
+        //this.stockName = GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getName();
+        this.stockName = GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStockName();
         this.stockPrice = (int)(GameObject.Find("AppStock").transform.Find("StockDetail").transform.Find("StockDetailScript").GetComponent<StockDetailScript>().getStock().getPrice());
         this.stockCount = 0;
 
@@ -29,6 +30,9 @@ public class StockSellPage : MonoBehaviour
 
         this.stockPriceCaled = 0;
         this.inputProcessed = "0";
+
+
+        Debug.Log("StockSellPage.init() : this.stockName : " + this.stockName);
 
 
 
@@ -45,6 +49,7 @@ public class StockSellPage : MonoBehaviour
 
     public void refresh()
     {
+        Debug.Log("StockSellPage.refresh() : this.stockName : " + this.stockName);
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
 
         this.stockPriceCaled = this.stockPrice * this.stockCount;
