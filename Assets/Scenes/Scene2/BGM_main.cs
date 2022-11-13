@@ -8,6 +8,10 @@ public class BGM_main : MonoBehaviour
     AudioSource bgmSourceMain;
     void Awake()
     {
+        //BGM OFF
+        return;
+        //
+
         //print("awake");
         if (GameObject.Find("BGM_start").GetComponent<AudioSource>().isPlaying)
         {
