@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenApp : MonoBehaviour
+public class ChangePage_InstListAll : MonoBehaviour
 {
     public GameObject appOpen;
     public GameObject appClose;
@@ -15,7 +15,7 @@ public class OpenApp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OpeningApp()

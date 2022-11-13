@@ -33,7 +33,7 @@ public class Deposit : FinancialInstrument
         return this.code;
     }
 
-    public string getName()
+    public override string getName()
     {
         return this.name;
     }

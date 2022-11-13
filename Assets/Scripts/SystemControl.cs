@@ -7,6 +7,7 @@ public class SystemControl : MonoBehaviour
     public Player player;
     public World world;
     public StockControl stockControl;
+    public Bank bank;
 
     private static SystemControl instance = null;
 
@@ -49,9 +50,11 @@ public class SystemControl : MonoBehaviour
         this.player = new Player(1911);
         this.world = new World();
         this.stockControl = new StockControl();
+        this.bank = new Bank();
 
         this.world.new_game();
         this.stockControl.new_game();
+        this.bank.new_game();
 
     }
 

@@ -8,6 +8,7 @@ public abstract class FinancialInstrument
     private string name;
     private double interest;
 
+    public abstract string getName();
     public abstract int getCode();
     public abstract int getTermOrigin();
     public abstract double getInterest();

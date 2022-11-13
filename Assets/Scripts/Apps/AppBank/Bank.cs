@@ -34,6 +34,7 @@ public class Bank
     public void signUpInst(Player player, double moneySignUp, FinancialInstrument instrument);   // 완료
     public FinancialInstrument getInst();                                                        //
     public FinancialInstrument getInst(int instCode);                                            // 완료
+    public List<FinancialInstrument> getInstsAll();                                              //
     public double getSaving(int codePlayer);                                                     // 완료
 
     public void addInst(FinancialInstrument);                                                    // 완료
@@ -59,8 +60,13 @@ public class Bank
          * public Deposit(int code, string name, int termOirigin, double interest, double stability)
          * 
          */
-        Deposit deposit_basic = new Deposit(0, "예금테스트", 10, 1.05, 1.0);
-        this.addInst(deposit_basic);
+        Deposit deposit_nh = new Deposit(0, "농협예금", 10, 1.05, 1.0);
+        Deposit deposit_sh = new Deposit(0, "신협예금", 10, 1.06, 1.0);
+        Deposit deposit_bs = new Deposit(0, "부산은행예금", 10, 1.04, 1.0);
+
+        this.addInst(deposit_nh);
+        this.addInst(deposit_sh);
+        this.addInst(deposit_bs);
     }
 
     public void update(int daysPast)
@@ -138,6 +144,15 @@ public class Bank
         this.instrumentsSignedUp.Remove(instSignedUp);
     }
 
+    public List<FinancialInstrument> getInstsAll()
+    {
+        return this.instrument;
+    }
+
+    public int getInstsCount()
+    {
+        return this.instrument.Count;
+    }
 
 
 
