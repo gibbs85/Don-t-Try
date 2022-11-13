@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract class FinancialInstrument
+public abstract class FinancialInstrument
 {
     private int code;
     private string name;
