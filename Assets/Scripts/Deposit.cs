@@ -7,27 +7,28 @@ public class Deposit : FinancialInstrument
     private int code;
     private string name;
     private int termOrigin;
-    private int termLeft;
     private double interest;
     private double stability;
 
     /*
-    public void pastsDay(int day);
     public int getCode();
     public string getName();
     public int getTermOrigin();
-    public int getTermLeft();
     public double getInterest();
     public double getStability();
 
     */
 
-    public void pastsDay(int day)
+    public Deposit(int code, string name, int termOirigin, double interest, double stability)
     {
-        this.termLeft = -day;
+        this.code = code;
+        this.name = name;
+        this.termOrigin = termOrigin;
+        this.interest = interest;
+        this.stability = stability;
     }
 
-    public int getCode()
+    public override int getCode()
     {
         return this.code;
     }
@@ -37,17 +38,12 @@ public class Deposit : FinancialInstrument
         return this.name;
     }
 
-    public int getTermOrigin()
+    public override int getTermOrigin()
     {
         return this.termOrigin;
     }
 
-    public int getTermLeft()
-    {
-        return this.termLeft;
-    }
-
-    public double getInterest()
+    public override double getInterest()
     {
         return this.interest;
     }
