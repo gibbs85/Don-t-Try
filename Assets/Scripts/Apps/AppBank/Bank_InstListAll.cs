@@ -77,10 +77,14 @@ public class Bank_InstListAll : MonoBehaviour
             GameObject btn = Resources.Load<GameObject>("Prefabs/InstButtonContentListAll");
 
             GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("AppBank").transform.Find("InstListAll").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
-            Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = inst.getName();
+
+            Instance.GetComponentInChildren<BtnInst>().setInst(inst);
+
+            Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = Instance.GetComponentInChildren<BtnInst>().getName();
             Instance.transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().text = inst.getInterest().ToString("F2") + "%";
 
             Instance.transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(0, 0, 0, 255);
+
 
         }
 

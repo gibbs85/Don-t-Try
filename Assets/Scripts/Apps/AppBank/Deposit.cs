@@ -19,7 +19,7 @@ public class Deposit : FinancialInstrument
 
     */
 
-    public Deposit(int code, string name, int termOirigin, double interest, double stability)
+    public Deposit(int code, string name, int termOrigin, double interest, double stability)
     {
         this.code = code;
         this.name = name;
@@ -48,7 +48,7 @@ public class Deposit : FinancialInstrument
         return this.interest;
     }
 
-    public double getStability()
+    public override double getStability()
     {
         return this.stability;
     }

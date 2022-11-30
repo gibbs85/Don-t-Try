@@ -12,4 +12,5 @@ public abstract class FinancialInstrument
     public abstract int getCode();
     public abstract int getTermOrigin();
     public abstract double getInterest();
+    public abstract double getStability();
 }
