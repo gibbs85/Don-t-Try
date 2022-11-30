@@ -60,9 +60,9 @@ public class Bank
          * public Deposit(int code, string name, int termOirigin, double interest, double stability)
          * 
          */
-        Deposit deposit_nh = new Deposit(0, "³óÇù¿¹±Ý", 10, 1.05, 1.0);
-        Deposit deposit_sh = new Deposit(0, "½ÅÇù¿¹±Ý", 10, 1.06, 1.0);
-        Deposit deposit_bs = new Deposit(0, "ºÎ»êÀºÇà¿¹±Ý", 10, 1.04, 1.0);
+        Deposit deposit_nh = new Deposit(100, "³óÇù¿¹±Ý", 10, 1.05, 1.0);
+        Deposit deposit_sh = new Deposit(200, "½ÅÇù¿¹±Ý", 10, 1.06, 1.0);
+        Deposit deposit_bs = new Deposit(300, "ºÎ»êÀºÇà¿¹±Ý", 10, 1.04, 1.0);
 
         this.addInst(deposit_nh);
         this.addInst(deposit_sh);
