@@ -20,6 +20,7 @@ public class Bank_InstSignUp : MonoBehaviour
     public FinancialInstrument inst;
     public int moneySignUp;
     private string inputProcessed;
+    private double moneyPlayer;
 
     public void page_open(FinancialInstrument inst, int codePlayer)
     {
@@ -38,6 +39,7 @@ public class Bank_InstSignUp : MonoBehaviour
         this.instName = this.inst.getName();
         this.moneySignUp = 0;
         this.inputProcessed = "0";
+        this.moneyPlayer = SystemControl.Instance.player.getMoney();
 
         this.phoneHome = GameObject.Find("PhoneOnHand").transform.Find("ScreenHome").gameObject;
         this.pageThis = GameObject.Find("AppBank").transform.Find("InstSignUp").gameObject;
@@ -48,6 +50,14 @@ public class Bank_InstSignUp : MonoBehaviour
     public void refresh()
     {
         this.pageThis.transform.Find("TextMoneySignUpTmpro").GetComponentInChildren<TextMeshProUGUI>().text = this.moneySignUp.ToString("c", numberFormat);
+
+        if(this.moneySignUp > this.moneyPlayer)
+            this.pageThis.transform.Find("TextMoneySignUpTmpro").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(255, 38, 4, 255);
+        else
+            this.pageThis.transform.Find("TextMoneySignUpTmpro").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(0, 112, 192, 255);
+
+        this.moneyPlayer = SystemControl.Instance.player.getMoney();
+        //소지금 출력 텍스트 수정
     }
 
     public void goBack()
@@ -106,7 +116,18 @@ public class Bank_InstSignUp : MonoBehaviour
 
     public void btn_confirm()
     {
+        if (this.moneySignUp > this.moneyPlayer)
+            return;
 
+        if (this.moneySignUp <= 0)
+            return;
+
+        SystemControl.Instance.bank.signUpInst(SystemControl.Instance.player, this.moneySignUp, this.codeInst, SystemControl.Instance.world.getDate());
+        SystemControl.Instance.player.spendMoney(this.moneySignUp);
+        SystemControl.Instance.player.exhaustFatigue(2);
+
+        this.moneySignUp = 0;
+        this.refresh();
     }
 
     public void input_1()
