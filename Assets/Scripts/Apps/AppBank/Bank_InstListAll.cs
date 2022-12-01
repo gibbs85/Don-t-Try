@@ -100,4 +100,18 @@ public class Bank_InstListAll : MonoBehaviour
             Destroy(GameObject.Find("Viewport").transform.Find("Content").GetChild(i).gameObject);
         }
     }
+
+    public void page_open_listAll()
+    {
+        this.page_open();
+    }
+
+    public void page_open_listSignedUp()
+    {
+        GameObject pageOpen = GameObject.Find("AppBank").transform.Find("InstListSignedUp").gameObject;
+        pageOpen.SetActive(true);
+        pageOpen.GetComponentInChildren<Bank_InstListSignedUp>().page_open();
+        this.pageClose.SetActive(false);
+    }
+
 }
