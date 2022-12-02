@@ -8,6 +8,7 @@ public class SystemControl : MonoBehaviour
     public World world;
     public StockControl stockControl;
     public Bank bank;
+    public Messenger msgr;
 
     private static SystemControl instance = null;
 
@@ -51,10 +52,15 @@ public class SystemControl : MonoBehaviour
         this.world = new World();
         this.stockControl = new StockControl();
         this.bank = new Bank();
+        this.msgr = new Messenger();
+        Debug.Log("SystemControl: new Classes completed.");
+
 
         this.world.new_game();
         this.stockControl.new_game();
         this.bank.new_game();
+        this.msgr.new_game();
+        Debug.Log("SystemControl: new Classes: new_game() completed.");
 
     }
 

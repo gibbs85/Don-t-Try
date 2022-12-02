@@ -60,6 +60,20 @@ public class World
 
     private void nextDay()
     {
+        /*
+         * 테스트
+         */
+
+        //if (this.date == 1)
+        //{
+        //    SystemControl.Instance.msgr.test_AddNewChatRoom();
+        //}
+        //SystemControl.Instance.msgr.
+
+        /*
+         */
+
+
         Debug.Log("World.cs: nextDay(): entered");
         this.date++; // 날짜 진행
         this.day++; // 요일 진행
