@@ -122,6 +122,8 @@ public class Bank_InstSignUp : MonoBehaviour
         if (this.moneySignUp <= 0)
             return;
 
+        //Debug.Log("InstSIgnUp Confirm Btn clicked.");
+
         SystemControl.Instance.bank.signUpInst(SystemControl.Instance.player, this.moneySignUp, this.codeInst, SystemControl.Instance.world.getDate());
         SystemControl.Instance.player.spendMoney(this.moneySignUp);
         SystemControl.Instance.player.exhaustFatigue(2);

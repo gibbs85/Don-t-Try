@@ -93,13 +93,20 @@ public class UI_GamePlay : MonoBehaviour
 
     public void btn_nextTurn()
     {
+        //Debug.Log("UI_GamePlay.cs: btn_nextTurn(): enetered");
         SystemControl.Instance.world.nextTurn();
 
+        //Debug.Log("UI_GamePlay.cs: btn_nextTurn(): world.nextTurn(): completed");
         this.update_stockApp();
+        //Debug.Log("UI_GamePlay.cs: btn_nextTurn(): update_stockApp(): completed");
+        this.update_bankApp();
     }
 
     private void update_stockApp()
     {
+        if (GameObject.Find("PhoneOnHand").transform.Find("AppStock").gameObject.activeSelf == false)
+            return;
+        //Debug.Log("UI_GamePlay.cs: update_stockApp()");
         if (GameObject.Find("PhoneOnHand").transform.Find("AppStock").transform.Find("StockListAll").gameObject.activeSelf == true)
             GameObject.Find("PhoneOnHand").transform.Find("AppStock").transform.Find("StockListAll").GetComponent<SecuritiesStockListAll>().refresh();
         if (GameObject.Find("PhoneOnHand").transform.Find("AppStock").transform.Find("StockDetail").gameObject.activeSelf == true)
@@ -110,5 +117,26 @@ public class UI_GamePlay : MonoBehaviour
             GameObject.Find("PhoneOnHand").transform.Find("AppStock").transform.Find("StockListOwned").GetComponent<StockListOwned>().refresh();
         if (GameObject.Find("PhoneOnHand").transform.Find("AppStock").transform.Find("StockDetail").gameObject.activeSelf == true)
             GameObject.Find("StockDetail").transform.Find("StockDetailChart").transform.Find("ChartStock").GetComponent<ChartStock>().refresh();
+    }
+
+    private void update_bankApp()
+    {
+        if (GameObject.Find("PhoneOnHand").transform.Find("AppBank").gameObject.activeSelf == false)
+            return;
+        //Debug.Log("UI_GamePlay.cs: update_bankApp()");
+        if (GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("Bank1").gameObject.activeSelf == true)
+        {
+            Debug.Log("UI_GamePlay.cs: update_bankApp(): if 0");
+            GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("Bank1").GetComponent<AppBank_myAsset>().refresh();
+        }
+        if (GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("InstListAll").gameObject.activeSelf == true)
+        {
+            Debug.Log("UI_GamePlay.cs: update_bankApp(): if 1");
+            GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("InstListAll").GetComponent<Bank_InstListAll>().refresh();
+        }
+        if (GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("InstSignUp").gameObject.activeSelf == true)
+            GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("InstSignUp").GetComponent<Bank_InstSignUp>().refresh();
+        if (GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("InstListSignedUp").gameObject.activeSelf == true)
+            GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("InstListSignedUp").GetComponent<Bank_InstListSignedUp>().refresh();
     }
 }

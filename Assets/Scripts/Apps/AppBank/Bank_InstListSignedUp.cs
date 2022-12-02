@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Globalization;
 
-public class Bank_InstListAll : MonoBehaviour
+public class Bank_InstListSignedUp : MonoBehaviour
 {
     NumberFormatInfo numberFormat;
 
@@ -13,18 +13,7 @@ public class Bank_InstListAll : MonoBehaviour
     public GameObject pageThis;
     public GameObject pageClose;
     public GameObject pageGoBack;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        this.init();
-        this.refresh();
-    }
-
-    void OnEnable()
-    {
-        this.refresh();
-    }
+    private int codePlayer;
 
     public void page_open()
     {
@@ -34,8 +23,9 @@ public class Bank_InstListAll : MonoBehaviour
 
     public void init()
     {
+        this.codePlayer = SystemControl.Instance.player.getCode();
         this.phoneHome = GameObject.Find("PhoneOnHand").transform.Find("ScreenHome").gameObject;
-        this.pageThis = GameObject.Find("AppBank").transform.Find("InstListAll").gameObject;
+        this.pageThis = GameObject.Find("AppBank").transform.Find("InstListSignedUp").gameObject;
         this.pageClose = this.pageThis;
         this.pageGoBack = GameObject.Find("AppBank").transform.Find("Bank1").gameObject;
     }
@@ -54,7 +44,6 @@ public class Bank_InstListAll : MonoBehaviour
 
     public void refresh()
     {
-        Debug.Log("Bank_InstListAll.cs: refresh()");
         /*
          * 이전 버튼들 삭제
          */
@@ -69,22 +58,27 @@ public class Bank_InstListAll : MonoBehaviour
         numberFormat = new CultureInfo("ko-KR", false).NumberFormat;
 
         int i = 0;
-        foreach (FinancialInstrument inst in (SystemControl.Instance.bank.getInstsAll()))
+        foreach (InstSignedUp signedUp in (SystemControl.Instance.bank.getInstsAll(this.codePlayer)))
         {
+            Debug.Log("SystemControl codePlayer: " + SystemControl.Instance.player.getCode());
+            Debug.Log("Bank_InstListSignedUp.codePlayer: " + this.codePlayer);
+
+            FinancialInstrument inst = signedUp.getInst();
             i++;
             Debug.Log("Count:" + i);
             double rate = inst.getInterest();
 
-            GameObject btn = Resources.Load<GameObject>("Prefabs/InstButtonContentListAll");
+            GameObject btn = Resources.Load<GameObject>("Prefabs/InstButtonContentListSignedUp");
 
-            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("AppBank").transform.Find("InstListAll").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("AppBank").transform.Find("InstListSignedUp").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
 
             Instance.GetComponentInChildren<BtnInst>().setInst(inst);
 
             Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = Instance.GetComponentInChildren<BtnInst>().getName();
             Instance.transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().text = "이윤: " + inst.getInterest().ToString("F2") + "%";
             Instance.transform.Find("TextStab").GetComponentInChildren<TextMeshProUGUI>().text = "안정성: " + (inst.getStability() * 100.0).ToString("F2") + "%";
-            Instance.transform.Find("TextTerm").GetComponentInChildren<TextMeshProUGUI>().text = "예치 기간: " + inst.getTermOrigin().ToString() + "일";
+            Instance.transform.Find("TextTerm").GetComponentInChildren<TextMeshProUGUI>().text = "만기까지: " + signedUp.getTermLeft().ToString() + "일";
+            Instance.transform.Find("TextMoney").GetComponentInChildren<TextMeshProUGUI>().text = "예치금: " + signedUp.getMoneyDeposit().ToString("c", numberFormat);
 
             Instance.transform.Find("TextPrice").GetComponentInChildren<TextMeshProUGUI>().color = new Color32(0, 0, 0, 255);
 
@@ -95,7 +89,7 @@ public class Bank_InstListAll : MonoBehaviour
 
     public void delete()
     {
-
+        Debug.Log("Bank_InstListSignedUp.cs: delete(): entered");
         int countchild = GameObject.Find("Viewport").transform.Find("Content").childCount;
 
         for (int i = 0; i < countchild; i++)
@@ -104,17 +98,18 @@ public class Bank_InstListAll : MonoBehaviour
         }
     }
 
-    public void page_open_listAll()
+    public void page_open_listSignedUp()
     {
         this.page_open();
     }
 
-    public void page_open_listSignedUp()
+    public void page_open_listAll()
     {
-        GameObject pageOpen = GameObject.Find("AppBank").transform.Find("InstListSignedUp").gameObject;
+        GameObject pageOpen = GameObject.Find("AppBank").transform.Find("InstListAll").gameObject;
         pageOpen.SetActive(true);
-        pageOpen.GetComponentInChildren<Bank_InstListSignedUp>().page_open();
+        pageOpen.GetComponentInChildren<Bank_InstListAll>().page_open();
         this.pageClose.SetActive(false);
     }
+
 
 }

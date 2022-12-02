@@ -60,6 +60,7 @@ public class World
 
     private void nextDay()
     {
+        Debug.Log("World.cs: nextDay(): entered");
         this.date++; // 날짜 진행
         this.day++; // 요일 진행
         if (this.day > (int)DaysOfTheWeek.SUNDAY)
@@ -68,6 +69,10 @@ public class World
         this.time = this.timeTurns[this.turn];
 
         SystemControl.Instance.player.exhaustFatigue(-5);
+        Debug.Log("World.cs: nextDay(). exhaustFatigue: completed");
+        SystemControl.Instance.bank.update(1);
+        Debug.Log("World.cs: nextDay(). bank.update: completed");
+
         UI_GamePlay.update_time();
         UI_GamePlay.update_date();
 
@@ -77,6 +82,7 @@ public class World
 
     public void nextTurn()
     {
+        //Debug.Log("World.cs: nextTurn(): enetered");
         this.turn++;
         if (this.turn >= this.timeTurns.Length)
         {
@@ -84,9 +90,13 @@ public class World
         }
 
         this.time = this.timeTurns[this.turn];
-        SystemControl.Instance.stockControl.updateAllStocks(this.time - this.timeTurns[this.turn - 1]);//not sure
+        //SystemControl.Instance.stockControl.updateAllStocks(this.time - this.timeTurns[this.turn - 1]);//not sure
+        //Debug.Log("World.cs: nextTurn(): stockControl.updateAllStocks() completed");
 
         UI_GamePlay.update_time();
+        //UI_GamePlay.update_stockApp();
+        //UI_GamePlay.update_bankApp();
+        //Debug.Log("World.cs: nextTurn(): (inside) completed");
 
     }
 
