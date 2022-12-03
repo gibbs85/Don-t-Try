@@ -64,10 +64,38 @@ public class World
          * 테스트
          */
 
-        //if (this.date == 1)
-        //{
-        //    SystemControl.Instance.msgr.test_AddNewChatRoom();
-        //}
+        if (this.date == 0)
+        {
+            SystemControl.Instance.msgr.test_AddNewChatRoom();
+        }
+        else if (this.date < 9)
+        {
+            SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "이것도 받아 보시지", this.date));
+        }
+        if (this.date == 9)
+        {
+            SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "이걸 안 보네", this.date));
+        }
+        if (this.date == 12)
+        {
+            SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "왜 안 읽음", this.date));
+        }
+        if (this. date == 13)
+        {
+            SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야", this.date));
+        }
+        if (this.date == 14)
+        {
+            SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야", this.date));
+        }
+        if (this.date == 15)
+        {
+            SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야", this.date));
+        }
+        if (this.date > 15)
+        {
+            SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야야야야야야야야야야야야야야야야야야야야야야야야야", this.date));
+        }
         //SystemControl.Instance.msgr.
 
         /*

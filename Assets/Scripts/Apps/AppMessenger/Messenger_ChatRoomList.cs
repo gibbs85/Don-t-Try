@@ -42,37 +42,17 @@ public class Messenger_ChatRoomList : MonoBehaviour
     {
         this.delete();
 
-        for (int i = 0; i < SystemControl.Instance.msgr.getChatRooms().Count; i++)
-        {
-            ChatContainer room = SystemControl.Instance.msgr.getChatRooms()[i];
-
-            GameObject btn = Resources.Load<GameObject>("Prefabs/BtnChatRoomList");
-            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("AppMessenger").transform.Find("ChatRoomList").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
-
-            Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = room.getNameChatRoom();
-            Instance.transform.Find("TextThumbnail").GetComponentInChildren<TextMeshProUGUI>().text = this.getThumbnail(room);
-
-            int unread = room.getUnread();
-            if (unread > 0)
-            {
-                //GameObject unreadAlert = GameObject.Find(Instance).transform.Find("UnreadAlert").gameObject;
-                //unreadAlert.SetActive(true);
-                Instance.transform.Find("UnreadAlert").gameObject.SetActive(true);
-                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = unread.ToString();
-            }
-
-        }
-
-
-        //foreach (ChatContainer rooms in (SystemControl.Instance.msgr.getChatRooms()))
+        //for (int i = 0; i < SystemControl.Instance.msgr.getChatRooms().Count; i++)
         //{
+        //    ChatContainer room = SystemControl.Instance.msgr.getChatRooms()[i];
+
         //    GameObject btn = Resources.Load<GameObject>("Prefabs/BtnChatRoomList");
         //    GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("AppMessenger").transform.Find("ChatRoomList").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
 
-        //    Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = rooms.getNameChatRoom();
-        //    Instance.transform.Find("TextThumbnail").GetComponentInChildren<TextMeshProUGUI>().text = this.getThumbnail(rooms);
+        //    Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = room.getNameChatRoom();
+        //    Instance.transform.Find("TextThumbnail").GetComponentInChildren<TextMeshProUGUI>().text = this.getThumbnail(room);
 
-        //    int unread = rooms.getUnread();
+        //    int unread = room.getUnread();
         //    if (unread > 0)
         //    {
         //        //GameObject unreadAlert = GameObject.Find(Instance).transform.Find("UnreadAlert").gameObject;
@@ -80,37 +60,45 @@ public class Messenger_ChatRoomList : MonoBehaviour
         //        Instance.transform.Find("UnreadAlert").gameObject.SetActive(true);
         //        Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = unread.ToString();
         //    }
+
         //}
+
+
+
+        foreach (ChatContainer rooms in (SystemControl.Instance.msgr.getChatRooms()))
+        {
+            GameObject btn = Resources.Load<GameObject>("Prefabs/BtnChatRoomList");
+            GameObject Instance = (GameObject)Instantiate(btn, GameObject.Find("AppMessenger").transform.Find("ChatRoomList").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+
+            Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = rooms.getNameChatRoom();
+            Instance.transform.Find("TextThumbnail").GetComponentInChildren<TextMeshProUGUI>().text = rooms.getThumbnail();
+
+            int unread = rooms.getUnread();
+            Debug.Log("Messenger_ChatRoomList.cs: refresh(): unread: " + unread);
+            if (unread > 0)
+            {
+                //GameObject unreadAlert = GameObject.Find(Instance).transform.Find("UnreadAlert").gameObject;
+                //unreadAlert.SetActive(true);
+                Instance.transform.Find("UnreadAlert").gameObject.SetActive(true);
+                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = unread.ToString();
+            }
+            if (unread > 99)
+            {
+                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = "99+";
+                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().fontSize = 9;
+            }
+        }
     }
 
     private void delete()
     {
+        int countchild = GameObject.Find("Viewport").transform.Find("Content").childCount;
 
-    }
-
-    private string getThumbnail(Chat chat)
-    {
-        string thumb = chat.getString();
-
-        if(thumb.Length > 20)
+        for (int i = 0; i < countchild; i++)
         {
-            thumb = thumb.Substring(0, 20);
-            thumb = thumb + "......";
+            Destroy(GameObject.Find("Viewport").transform.Find("Content").GetChild(i).gameObject);
         }
-
-        return thumb;
     }
 
-    private string getThumbnail(ChatContainer chatroom)
-    {
-        string thumb = chatroom.getChat(-1).getString();
 
-        if (thumb.Length > 20)
-        {
-            thumb = thumb.Substring(0, 20);
-            thumb = thumb + "......";
-        }
-
-        return thumb;
-    }
 }

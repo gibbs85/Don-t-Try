@@ -23,6 +23,7 @@ public class ChatContainer
     public void addChat(Chat chat)
     {
         this.chatLog.AddLast(chat);
+        this.unread++;
     }
 
     public string getNameChatRoom()
@@ -43,5 +44,18 @@ public class ChatContainer
     public int getUnread()
     {
         return this.unread;
+    }
+
+    public string getThumbnail()
+    {
+        string thumb = this.chatLog.Last().getString();
+
+        if (thumb.Length > 20)
+        {
+            thumb = thumb.Substring(0, 20);
+            thumb = thumb + "......";
+        }
+
+        return thumb;
     }
 }

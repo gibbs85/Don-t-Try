@@ -100,6 +100,7 @@ public class UI_GamePlay : MonoBehaviour
         this.update_stockApp();
         //Debug.Log("UI_GamePlay.cs: btn_nextTurn(): update_stockApp(): completed");
         this.update_bankApp();
+        this.update_messengerApp();
     }
 
     private void update_stockApp()
@@ -138,5 +139,14 @@ public class UI_GamePlay : MonoBehaviour
             GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("InstSignUp").GetComponent<Bank_InstSignUp>().refresh();
         if (GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("InstListSignedUp").gameObject.activeSelf == true)
             GameObject.Find("PhoneOnHand").transform.Find("AppBank").transform.Find("InstListSignedUp").GetComponent<Bank_InstListSignedUp>().refresh();
+    }
+
+    private void update_messengerApp()
+    {
+        if (GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").gameObject.activeSelf == false)
+            return;
+        //Debug.Log("UI_GamePlay.cs: update_stockApp()");
+        if (GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoomList").gameObject.activeSelf == true)
+            GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoomList").GetComponent<Messenger_ChatRoomList>().refresh();
     }
 }
