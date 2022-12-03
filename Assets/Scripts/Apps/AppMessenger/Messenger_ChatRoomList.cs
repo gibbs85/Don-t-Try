@@ -85,7 +85,7 @@ public class Messenger_ChatRoomList : MonoBehaviour
             if (unread > 99)
             {
                 Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = "99+";
-                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().fontSize = 9;
+                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().fontSize = 8;
             }
         }
     }

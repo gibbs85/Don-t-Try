@@ -50,9 +50,9 @@ public class ChatContainer
     {
         string thumb = this.chatLog.Last().getString();
 
-        if (thumb.Length > 20)
+        if (thumb.Length > 13)
         {
-            thumb = thumb.Substring(0, 20);
+            thumb = thumb.Substring(0, 13);
             thumb = thumb + "......";
         }
 

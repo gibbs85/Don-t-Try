@@ -68,33 +68,38 @@ public class World
         {
             SystemControl.Instance.msgr.test_AddNewChatRoom();
         }
-        else if (this.date < 9)
+        else if (this.date < 3)
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "이것도 받아 보시지", this.date));
         }
-        if (this.date == 9)
+        if (this.date == 6)
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "이걸 안 보네", this.date));
         }
-        if (this.date == 12)
+        if (this.date == 9)
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "왜 안 읽음", this.date));
         }
-        if (this. date == 13)
+        if (this. date == 10)
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야", this.date));
         }
-        if (this.date == 14)
+        if (this.date == 11)
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야", this.date));
         }
-        if (this.date == 15)
+        if (this.date == 12)
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야", this.date));
         }
-        if (this.date > 15)
+        if (this.date > 13)
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야야야야야야야야야야야야야야야야야야야야야야야야야", this.date));
+        }
+        if (this.date > 14)
+        {
+            SystemControl.Instance.msgr.test_AddNewNewChatRoom();
+            SystemControl.Instance.msgr.addChat("테스트방 둘", new Chat("테스트 상대 둘", "자네가 답을 안한다더군", this.date));
         }
         //SystemControl.Instance.msgr.
 

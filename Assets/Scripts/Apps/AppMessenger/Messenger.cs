@@ -49,4 +49,15 @@ public class Messenger
 
         this.chatrooms.Add(testRoom);
     }
+
+    public void test_AddNewNewChatRoom()
+    {
+        int date = SystemControl.Instance.world.getDate();
+        ChatContainer testRoom = new ChatContainer("테스트방 둘");
+        //Chat chat = new Chat("테스트 상대 둘", "테스트 중입니다.", date);
+        //Debug.Log("Messenger.cs: test_AddNewChatRoom(): chat.getString(): " + chat.getString());
+        //testRoom.addChat(chat);
+
+        this.chatrooms.Add(testRoom);
+    }
 }
