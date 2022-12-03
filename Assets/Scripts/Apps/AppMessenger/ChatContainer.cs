@@ -24,6 +24,9 @@ public class ChatContainer
     {
         this.chatLog.AddLast(chat);
         this.unread++;
+
+        if (GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").gameObject.activeSelf == true)
+            GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").GetComponent<Messenger_ChatRoom>().refresh_msg_added();
     }
 
     public string getNameChatRoom()

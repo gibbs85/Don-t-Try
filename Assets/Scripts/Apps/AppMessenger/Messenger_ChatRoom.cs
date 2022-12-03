@@ -66,6 +66,22 @@ public class Messenger_ChatRoom : MonoBehaviour
         }
     }
 
+    public void refresh_msg_added()
+    {
+        int msgShowed = this.msgCountToShow;
+        this.msgCountToShow = this.ChatRoom.getCountChat();
+        //int countMsgAdded = this.msgCountToShow - msgShowed;
+
+
+        for (int i = msgShowed - 1; i < this.msgCountToShow; i++)
+        {
+            GameObject dialogLeft = Resources.Load<GameObject>("Prefabs/DialogLineLeft");
+            GameObject Instance = (GameObject)Instantiate(dialogLeft, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+
+            Instance.transform.Find("ImageDialogBubbleLeft").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = this.ChatRoom.getChat(i).getString();
+        }
+    }
+
     private void delete()
     {
 
