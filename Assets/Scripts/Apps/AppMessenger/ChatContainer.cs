@@ -25,6 +25,8 @@ public class ChatContainer
         this.chatLog.AddLast(chat);
         this.unread++;
 
+        GameObject.Find("PhoneOnHand").transform.Find("ScreenHome").transform.Find("BtnSNS").GetComponent<MessengerHomeIcon>().setUnread(this.unread);
+
         if (GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").gameObject.activeSelf == true)
             GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").GetComponent<Messenger_ChatRoom>().refresh_msg_added();
     }
@@ -75,6 +77,7 @@ public class ChatContainer
             this.chatLog.ElementAt(this.chatLog.Count - unreadIndexStart + i).doneRead();
             this.unread--;
         }
+        GameObject.Find("PhoneOnHand").transform.Find("ScreenHome").transform.Find("BtnSNS").GetComponent<MessengerHomeIcon>().setUnread(this.unread);
     }
 
     public void readChecked(int count)
