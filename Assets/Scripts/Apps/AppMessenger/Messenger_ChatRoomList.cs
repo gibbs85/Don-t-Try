@@ -72,6 +72,7 @@ public class Messenger_ChatRoomList : MonoBehaviour
 
             Instance.transform.Find("TextName").GetComponentInChildren<TextMeshProUGUI>().text = rooms.getNameChatRoom();
             Instance.transform.Find("TextThumbnail").GetComponentInChildren<TextMeshProUGUI>().text = rooms.getThumbnail();
+            Instance.GetComponentInChildren<BtnChatRoomList>().setChatRoom(rooms);
 
             int unread = rooms.getUnread();
             Debug.Log("Messenger_ChatRoomList.cs: refresh(): unread: " + unread);

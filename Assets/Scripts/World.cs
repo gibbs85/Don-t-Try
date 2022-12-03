@@ -92,11 +92,19 @@ public class World
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야", this.date));
         }
-        if (this.date > 13)
+        if (this.date == 13)
+        {
+            SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("player", "뭐", this.date));
+        }
+        if (this.date == 14)
+        {
+            SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("player", "왜", this.date));
+        }
+        if (this.date > 15)
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야야야야야야야야야야야야야야야야야야야야야야야야야", this.date));
         }
-        if (this.date > 14)
+        if (this.date > 16)
         {
             SystemControl.Instance.msgr.test_AddNewNewChatRoom();
             SystemControl.Instance.msgr.addChat("테스트방 둘", new Chat("테스트 상대 둘", "자네가 답을 안한다더군", this.date));

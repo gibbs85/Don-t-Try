@@ -730,7 +730,7 @@ GameObject:
   - component: {fileID: 8216745078764835236}
   - component: {fileID: 8216745078764835163}
   - component: {fileID: 8216745078764835162}
-  - component: {fileID: 9076307992519511630}
+  - component: {fileID: 7991926519732868297}
   m_Layer: 5
   m_Name: BtnChatRoomList
   m_TagString: Untagged
@@ -846,9 +846,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9076307992519511630}
-        m_TargetAssemblyTypeName: BtnInst, Assembly-CSharp
-        m_MethodName: openDetailPage
+      - m_Target: {fileID: 7991926519732868297}
+        m_TargetAssemblyTypeName: BtnChatRoomList, Assembly-CSharp
+        m_MethodName: open_page
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -858,7 +858,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &9076307992519511630
+--- !u!114 &7991926519732868297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -867,10 +867,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8216745078764835160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f071174610d35f14b948b7c5d5c63897, type: 3}
+  m_Script: {fileID: 11500000, guid: 624cf933d950037468920894df3f64f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
-  code: 0
-  pageOpen: {fileID: 0}
-  pageClose: {fileID: 0}

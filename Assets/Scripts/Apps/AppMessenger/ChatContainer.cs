@@ -58,4 +58,9 @@ public class ChatContainer
 
         return thumb;
     }
+
+    public int getCountChat()
+    {
+        return this.chatLog.Count;
+    }
 }
