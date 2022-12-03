@@ -76,17 +76,22 @@ public class Messenger_ChatRoomList : MonoBehaviour
 
             int unread = rooms.getUnread();
             Debug.Log("Messenger_ChatRoomList.cs: refresh(): unread: " + unread);
-            if (unread > 0)
+            if (unread > 99)
+            {
+                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = "99+";
+                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().fontSize = 8;
+            }
+            else if (unread > 0)
             {
                 //GameObject unreadAlert = GameObject.Find(Instance).transform.Find("UnreadAlert").gameObject;
                 //unreadAlert.SetActive(true);
                 Instance.transform.Find("UnreadAlert").gameObject.SetActive(true);
                 Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = unread.ToString();
             }
-            if (unread > 99)
+            else
             {
-                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = "99+";
-                Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().fontSize = 8;
+                if (Instance.transform.Find("UnreadAlert").gameObject.activeSelf == true)
+                    Instance.transform.Find("UnreadAlert").gameObject.SetActive(false);
             }
         }
     }

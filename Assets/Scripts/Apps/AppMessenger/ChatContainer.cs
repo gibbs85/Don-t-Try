@@ -66,4 +66,19 @@ public class ChatContainer
     {
         return this.chatLog.Count;
     }
+
+    public void readChecked()
+    {
+        int unreadIndexStart = this.unread;
+        for (int i = 0; i < unreadIndexStart; i++)
+        {
+            this.chatLog.ElementAt(this.chatLog.Count - unreadIndexStart + i).doneRead();
+            this.unread--;
+        }
+    }
+
+    public void readChecked(int count)
+    {
+
+    }
 }

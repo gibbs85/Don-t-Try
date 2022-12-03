@@ -31,6 +31,11 @@ public class Chat
     {
         return this.nameSpeaker;
     }
+
+    public void doneRead()
+    {
+        this.read = true;
+    }
 }
 
 public interface ChatInControl

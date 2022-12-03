@@ -50,6 +50,7 @@ public class Messenger_ChatRoom : MonoBehaviour
     public void refresh()
     {
         this.delete();
+        this.ChatRoom.readChecked();
         this.panelUpper.transform.Find("TextChatRoomName").GetComponentInChildren<TextMeshProUGUI>().text = this.ChatRoom.getNameChatRoom();
 
         //int countMaxMsg = 30;
@@ -74,6 +75,7 @@ public class Messenger_ChatRoom : MonoBehaviour
 
     public void refresh_msg_added()
     {
+        this.ChatRoom.readChecked();
         int msgShowed = this.msgCountToShow;                // msgShowed = 30 (index 0~29)
         this.msgCountToShow = this.ChatRoom.getCountChat(); // msgCountToShow = 31 (index 0~30)
         //int countMsgAdded = this.msgCountToShow - msgShowed;
