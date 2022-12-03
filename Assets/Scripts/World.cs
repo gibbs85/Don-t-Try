@@ -104,7 +104,7 @@ public class World
         {
             SystemControl.Instance.msgr.addChat("테스트 채팅방", new Chat("테스트 대화상대", "야야야야야야야야야야야야야야야야야야야야야야야야야", this.date));
         }
-        if (this.date > 16)
+        if (this.date == 16)
         {
             SystemControl.Instance.msgr.test_AddNewNewChatRoom();
             SystemControl.Instance.msgr.addChat("테스트방 둘", new Chat("테스트 상대 둘", "자네가 답을 안한다더군", this.date));
@@ -115,7 +115,7 @@ public class World
          */
 
 
-        Debug.Log("World.cs: nextDay(): entered");
+        //Debug.Log("World.cs: nextDay(): entered");
         this.date++; // 날짜 진행
         this.day++; // 요일 진행
         if (this.day > (int)DaysOfTheWeek.SUNDAY)
@@ -124,9 +124,9 @@ public class World
         this.time = this.timeTurns[this.turn];
 
         SystemControl.Instance.player.exhaustFatigue(-5);
-        Debug.Log("World.cs: nextDay(). exhaustFatigue: completed");
+        //Debug.Log("World.cs: nextDay(). exhaustFatigue: completed");
         SystemControl.Instance.bank.update(1);
-        Debug.Log("World.cs: nextDay(). bank.update: completed");
+        //Debug.Log("World.cs: nextDay(). bank.update: completed");
 
         UI_GamePlay.update_time();
         UI_GamePlay.update_date();

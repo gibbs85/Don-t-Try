@@ -27,8 +27,21 @@ public class ChatContainer
 
         GameObject.Find("PhoneOnHand").transform.Find("ScreenHome").transform.Find("BtnSNS").GetComponent<MessengerHomeIcon>().setUnread(this.unread);
 
+
         if (GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").gameObject.activeSelf == true)
-            GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").GetComponent<Messenger_ChatRoom>().refresh_msg_added();
+        {
+            GameObject chatRoomOpendObj = GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").gameObject;
+            string chatRoomOpendName = chatRoomOpendObj.GetComponent<Messenger_ChatRoom>().getNameChatRoom();
+
+            if (chatRoomOpendName.Equals(this.nameChatRoom))
+                GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").GetComponent<Messenger_ChatRoom>().refresh_msg_added();
+            else
+            {
+                GameObject.Find("PhoneOnHand").GetComponent<PhoneUI>().noti(this);
+            }
+        }
+        else
+            GameObject.Find("PhoneOnHand").GetComponent<PhoneUI>().noti(this);
     }
 
     public string getNameChatRoom()

@@ -75,7 +75,7 @@ public class Messenger_ChatRoomList : MonoBehaviour
             Instance.GetComponentInChildren<BtnChatRoomList>().setChatRoom(rooms);
 
             int unread = rooms.getUnread();
-            Debug.Log("Messenger_ChatRoomList.cs: refresh(): unread: " + unread);
+            //Debug.Log("Messenger_ChatRoomList.cs: refresh(): unread: " + unread);
             if (unread > 99)
             {
                 Instance.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = "99+";
@@ -99,6 +99,8 @@ public class Messenger_ChatRoomList : MonoBehaviour
     private void delete()
     {
         int countchild = GameObject.Find("Viewport").transform.Find("Content").childCount;
+
+        //Debug.Log("Messenger_ChatRoomList: delte(): countchild: " + countchild);
 
         for (int i = 0; i < countchild; i++)
         {

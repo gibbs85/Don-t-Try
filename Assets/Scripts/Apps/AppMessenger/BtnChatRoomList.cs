@@ -8,17 +8,17 @@ public class BtnChatRoomList : MonoBehaviour
 
     public void setChatRoom(ChatContainer chatRoom)
     {
-        Debug.Log("BtnChatRoomList.cs: setChatRoom(): entered");
+        //Debug.Log("BtnChatRoomList.cs: setChatRoom(): entered");
         this.chatRoom = chatRoom;
-        Debug.Log("BtnChatRoomList.cs: setChatRoom(): chatRoom.getNameChatRoom(): " + chatRoom.getNameChatRoom());
-        Debug.Log("BtnChatRoomList.cs: setChatRoom(): this.chatRoom.getNameChatRoom(): " + this.chatRoom.getNameChatRoom());
+        //Debug.Log("BtnChatRoomList.cs: setChatRoom(): chatRoom.getNameChatRoom(): " + chatRoom.getNameChatRoom());
+        //Debug.Log("BtnChatRoomList.cs: setChatRoom(): this.chatRoom.getNameChatRoom(): " + this.chatRoom.getNameChatRoom());
     }
 
     public void open_page()
     {
         GameObject page_open = GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").gameObject;
 
-        Debug.Log("BtnChatRoomList.cs: open_page():");
+        //Debug.Log("BtnChatRoomList.cs: open_page():");
         page_open.SetActive(true);
         page_open.GetComponentInChildren<Messenger_ChatRoom>().page_open(this.chatRoom);
 

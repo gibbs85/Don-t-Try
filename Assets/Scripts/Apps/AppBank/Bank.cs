@@ -58,11 +58,11 @@ public class InstSignedUp
 
     public void pastsDay(int daysPast)
     {
-        Debug.Log("InstSignedUp: pastsDay(" + daysPast + ")");
+        //Debug.Log("InstSignedUp: pastsDay(" + daysPast + ")");
         this.termLeft -= daysPast;
         if (this.termLeft < 0)
             this.termLeft = 0;
-        Debug.Log("InstSignedUp: terLeft: " + this.termLeft);
+        //Debug.Log("InstSignedUp: terLeft: " + this.termLeft);
     }
 
     public FinancialInstrument getInst()
@@ -147,19 +147,19 @@ public class Bank
     {
         List<InstSignedUp> toDelte = new List<InstSignedUp>();
 
-        Debug.Log("Bank.cs: update(daysPast): "+ daysPast);
+        //Debug.Log("Bank.cs: update(daysPast): "+ daysPast);
         foreach(InstSignedUp instSignedups in this.instrumentsSignedUp)
         {
-            Debug.Log("Bank.cs: update(): foreach");
+            //Debug.Log("Bank.cs: update(): foreach");
             instSignedups.pastsDay(daysPast);
 
-            Debug.Log("Bank.cs: update(): instSignedups.getTermLeft(): " + instSignedups.getTermLeft());
+            //Debug.Log("Bank.cs: update(): instSignedups.getTermLeft(): " + instSignedups.getTermLeft());
 
             if (instSignedups.getTermLeft() == 0)
             {
-                Debug.Log("Bank.cs: update(): if: entered");
+                //Debug.Log("Bank.cs: update(): if: entered");
                 this.returnMoney(instSignedups);
-                Debug.Log("Bank.cs: update(): if: eneded");
+                //Debug.Log("Bank.cs: update(): if: eneded");
                 toDelte.Add(instSignedups);
             }
         }
@@ -174,7 +174,7 @@ public class Bank
 
     public void signUpInst(Player player, double moneySignUp, int instCode, int date)
     {
-        Debug.Log("Bank.cs: InstSIgnUp()");
+        //Debug.Log("Bank.cs: InstSIgnUp()");
 
         //InstSignedUp instSignUp;
         //instSignUp.playerCode = player.getCode();
@@ -197,7 +197,7 @@ public class Bank
 
     private void returnMoney(InstSignedUp instSignedUp)
     {
-        Debug.Log("Bank.cs: returnMoney(): entered");
+        //Debug.Log("Bank.cs: returnMoney(): entered");
         double money = instSignedUp.getMoneyDeposit();
         double interest = this.getInst(instSignedUp.getInstCode()).getInterest();
 
@@ -207,7 +207,7 @@ public class Bank
 
         SystemControl.Instance.player.spendMoney(-money);
         //this.delInstSignedUp(instSignedUp); // deletion in foreach enumeration is forhibited.
-        Debug.Log("Bank.cs: returnMoney(): completed");
+        //Debug.Log("Bank.cs: returnMoney(): completed");
     }
 
     public double getSaving(int codePlayer)
@@ -244,9 +244,9 @@ public class Bank
 
     private void delInstSignedUp(InstSignedUp instSignedUp)
     {
-        Debug.Log("Bank.cs: delInstSignedUp(): entered");
+        //Debug.Log("Bank.cs: delInstSignedUp(): entered");
         this.instrumentsSignedUp.Remove(instSignedUp);
-        Debug.Log("Bank.cs: delInstSignedUp(): completed");
+        //Debug.Log("Bank.cs: delInstSignedUp(): completed");
     }
 
     public List<FinancialInstrument> getInstsAll()

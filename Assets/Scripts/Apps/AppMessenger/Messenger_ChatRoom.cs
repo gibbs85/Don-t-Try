@@ -110,4 +110,9 @@ public class Messenger_ChatRoom : MonoBehaviour
         }
     }
 
+    public string getNameChatRoom()
+    {
+        return this.ChatRoom.getNameChatRoom();
+    }
+
 }

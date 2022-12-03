@@ -60,12 +60,12 @@ public class Bank_InstListSignedUp : MonoBehaviour
         int i = 0;
         foreach (InstSignedUp signedUp in (SystemControl.Instance.bank.getInstsAll(this.codePlayer)))
         {
-            Debug.Log("SystemControl codePlayer: " + SystemControl.Instance.player.getCode());
-            Debug.Log("Bank_InstListSignedUp.codePlayer: " + this.codePlayer);
+            //Debug.Log("SystemControl codePlayer: " + SystemControl.Instance.player.getCode());
+            //Debug.Log("Bank_InstListSignedUp.codePlayer: " + this.codePlayer);
 
             FinancialInstrument inst = signedUp.getInst();
             i++;
-            Debug.Log("Count:" + i);
+            //Debug.Log("Count:" + i);
             double rate = inst.getInterest();
 
             GameObject btn = Resources.Load<GameObject>("Prefabs/InstButtonContentListSignedUp");
@@ -89,7 +89,7 @@ public class Bank_InstListSignedUp : MonoBehaviour
 
     public void delete()
     {
-        Debug.Log("Bank_InstListSignedUp.cs: delete(): entered");
+        //Debug.Log("Bank_InstListSignedUp.cs: delete(): entered");
         int countchild = GameObject.Find("Viewport").transform.Find("Content").childCount;
 
         for (int i = 0; i < countchild; i++)

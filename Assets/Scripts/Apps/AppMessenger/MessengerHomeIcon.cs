@@ -16,7 +16,7 @@ public class MessengerHomeIcon : MonoBehaviour
 
     public void refresh()
     {
-        Debug.Log("Messenger_ChatRoomList.cs: refresh(): unread: " + this.unread);
+        //Debug.Log("Messenger_ChatRoomList.cs: refresh(): unread: " + this.unread);
         if (this.unread > 99)
         {
             this.icon.transform.Find("UnreadAlert").transform.Find("TextUnread").GetComponentInChildren<TextMeshProUGUI>().text = "99+";
