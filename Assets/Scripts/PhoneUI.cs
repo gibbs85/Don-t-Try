@@ -22,6 +22,7 @@ public class PhoneUI : MonoBehaviour
         this.notiIcon.SetActive(true);
         this.notiText.SetActive(true);
 
+        StopCoroutine("Fade");
         StartCoroutine("Fade");
     }
 
