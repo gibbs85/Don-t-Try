@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1359785070786128380}
   - component: {fileID: 8595600845817369464}
   m_Layer: 7
-  m_Name: ImageDialogBubbleRight
+  m_Name: ImageDialogBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

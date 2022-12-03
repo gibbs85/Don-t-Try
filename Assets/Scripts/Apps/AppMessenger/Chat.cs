@@ -26,6 +26,11 @@ public class Chat
     {
         return this.dialog;
     }
+
+    public string getNameSpeaker()
+    {
+        return this.nameSpeaker;
+    }
 }
 
 public interface ChatInControl

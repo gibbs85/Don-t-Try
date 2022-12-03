@@ -62,7 +62,7 @@ public class Messenger_ChatRoom : MonoBehaviour
             GameObject dialogLeft = Resources.Load<GameObject>("Prefabs/DialogLineLeft");
             GameObject Instance = (GameObject)Instantiate(dialogLeft, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
 
-            Instance.transform.Find("ImageDialogBubbleLeft").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = this.ChatRoom.getChat(i).getString();
+            Instance.transform.Find("ImageDialogBubble").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = this.ChatRoom.getChat(i).getString();
         }
     }
 
@@ -75,10 +75,17 @@ public class Messenger_ChatRoom : MonoBehaviour
 
         for (int i = msgShowed - 1; i < this.msgCountToShow; i++)
         {
-            GameObject dialogLeft = Resources.Load<GameObject>("Prefabs/DialogLineLeft");
-            GameObject Instance = (GameObject)Instantiate(dialogLeft, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+            Chat chat = this.ChatRoom.getChat(i);
+            GameObject dialog;
 
-            Instance.transform.Find("ImageDialogBubbleLeft").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = this.ChatRoom.getChat(i).getString();
+            if (chat.getNameSpeaker().Equals("player"))
+                dialog = Resources.Load<GameObject>("Prefabs/DialogLineRight");
+            else
+                dialog = Resources.Load<GameObject>("Prefabs/DialogLineLeft");
+
+            GameObject Instance = (GameObject)Instantiate(dialog, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+
+            Instance.transform.Find("ImageDialogBubble").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = chat.getString();
         }
     }
 

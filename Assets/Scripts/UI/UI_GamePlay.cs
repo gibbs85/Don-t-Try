@@ -148,7 +148,7 @@ public class UI_GamePlay : MonoBehaviour
         //Debug.Log("UI_GamePlay.cs: update_stockApp()");
         if (GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoomList").gameObject.activeSelf == true)
             GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoomList").GetComponent<Messenger_ChatRoomList>().refresh();
-        if (GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").gameObject.activeSelf == true)
-            GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").GetComponent<Messenger_ChatRoom>().refresh();
+        //if (GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").gameObject.activeSelf == true)
+        //    GameObject.Find("PhoneOnHand").transform.Find("AppMessenger").transform.Find("ChatRoom").GetComponent<Messenger_ChatRoom>().refresh();
     }
 }
