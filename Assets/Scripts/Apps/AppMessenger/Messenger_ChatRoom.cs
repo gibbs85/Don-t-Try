@@ -10,6 +10,8 @@ public class Messenger_ChatRoom : MonoBehaviour
     public GameObject pageClose;
     public GameObject pageGoBack;
 
+    private GameObject panelUpper;
+
     private ChatContainer ChatRoom;
     private int msgCountToShow;
 
@@ -25,6 +27,8 @@ public class Messenger_ChatRoom : MonoBehaviour
         this.pageThis = GameObject.Find("AppMessenger").transform.Find("ChatRoom").gameObject;
         this.pageClose = this.pageThis;
         this.pageGoBack = GameObject.Find("AppMessenger").transform.Find("ChatRoomList").gameObject;
+
+        this.panelUpper = this.pageThis.transform.Find("PanelUpper").gameObject;
 
         this.ChatRoom = chatRoom;
         this.msgCountToShow = 30;
@@ -46,6 +50,8 @@ public class Messenger_ChatRoom : MonoBehaviour
     public void refresh()
     {
         this.delete();
+        this.panelUpper.transform.Find("TextChatRoomName").GetComponentInChildren<TextMeshProUGUI>().text = this.ChatRoom.getNameChatRoom();
+
         //int countMaxMsg = 30;
         //int countMsgAll = this.ChatRoom.getCountChat()
         //int countMaxMsg = countMsgAll;
@@ -68,12 +74,12 @@ public class Messenger_ChatRoom : MonoBehaviour
 
     public void refresh_msg_added()
     {
-        int msgShowed = this.msgCountToShow;
-        this.msgCountToShow = this.ChatRoom.getCountChat();
+        int msgShowed = this.msgCountToShow;                // msgShowed = 30 (index 0~29)
+        this.msgCountToShow = this.ChatRoom.getCountChat(); // msgCountToShow = 31 (index 0~30)
         //int countMsgAdded = this.msgCountToShow - msgShowed;
 
 
-        for (int i = msgShowed - 1; i < this.msgCountToShow; i++)
+        for (int i = msgShowed; i < this.msgCountToShow; i++)   // 30 (index 30)
         {
             Chat chat = this.ChatRoom.getChat(i);
             GameObject dialog;
@@ -87,6 +93,8 @@ public class Messenger_ChatRoom : MonoBehaviour
 
             Instance.transform.Find("ImageDialogBubble").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = chat.getString();
         }
+
+        
     }
 
     private void delete()
