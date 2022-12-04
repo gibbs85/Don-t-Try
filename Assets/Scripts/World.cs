@@ -55,7 +55,8 @@ public class World
         this.time = this.timeTurns[this.turn];
         this.day = 1;
 
-        this.addEventQueue(new Event_Test00().getEvContainer());
+        //this.addEventQueue(new Event_Test00().getEvContainer());
+        this.addEventQueue(new Event_TestNewMsgLive00().getEvContainer());
     }
 
     private void nextDay()

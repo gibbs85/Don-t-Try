@@ -8,6 +8,7 @@ public class ChatContainer
     public string nameChatRoom;
     public int unread;
     private LinkedList<Chat> chatLog;
+    private LinkedList<Chat> chatTobeAdded;
 
     //public bool addChat(Chat chat);
     //public string getNameChatRoom();
@@ -18,6 +19,7 @@ public class ChatContainer
         this.nameChatRoom = nameChatRoom;
         this.unread = 0;
         this.chatLog = new LinkedList<Chat>();
+        this.chatTobeAdded = new LinkedList<Chat>();
     }
 
     public void addChat(Chat chat)
@@ -44,6 +46,11 @@ public class ChatContainer
             GameObject.Find("PhoneOnHand").GetComponent<PhoneUI>().noti(this);
     }
 
+    public void addChatToBeAdded(Chat chat)
+    {
+        this.chatTobeAdded.AddLast(chat);
+    }
+
     public string getNameChatRoom()
     {
         return this.nameChatRoom;
@@ -52,6 +59,11 @@ public class ChatContainer
     public Chat getChat(int index)
     {
         return this.chatLog.ElementAt(index);
+    }
+
+    public Chat getChatToBeAdded(int index)
+    {
+        return this.chatTobeAdded.ElementAt(index);
     }
 
     public void setToRead()
@@ -80,6 +92,20 @@ public class ChatContainer
     public int getCountChat()
     {
         return this.chatLog.Count;
+    }
+
+    public int getCountChatToBeAdded()
+    {
+        return this.chatTobeAdded.Count;
+    }
+
+    public void toLog()
+    {
+        //Debug.Log("toLog: entered");
+        this.chatLog.AddLast(this.chatTobeAdded.First.Value);
+        //Debug.Log("toLog: addChat passed");
+        this.chatTobeAdded.RemoveFirst();
+        //Debug.Log("toLog: removeFirst passed");
     }
 
     public void readChecked()

@@ -39,6 +39,17 @@ public class Messenger
         }
     }
 
+    public void addChatToBeAdded(string chatRoomName, Chat chat)
+    {
+        foreach (ChatContainer room in this.chatrooms)
+        {
+            if (room.getNameChatRoom().Equals(chatRoomName))
+            {
+                room.addChatToBeAdded(chat);
+            }
+        }
+    }
+
     public void AddNewChatRoom(string ChatRoomName)
     {
         ChatContainer chatRoom = new ChatContainer(ChatRoomName);
