@@ -34,12 +34,24 @@ public class NPC
         EventContainer anEvent = this.eventsNPC.First.Value;
         int dateToday = SystemControl.Instance.world.getDate();
         int dateTrigger = anEvent.getTriggerDay();
+        int timeNow = SystemControl.Instance.world.getTime();
+        int triggerTime = anEvent.getTriggerTime();
         int triggerAffection = anEvent.getTriggerAffection();
 
-        if ( (dateToday >= dateTrigger) && (this.affection >= triggerAffection))
+        if (this.affection < triggerAffection)
+            return;
+
+        if ( (dateToday > dateTrigger))
         {
             SystemControl.Instance.world.addEventQueue(anEvent);
             this.delEvent(anEvent);
+            return;
+        }
+        if ( (dateToday == dateTrigger) &&  (timeNow >= triggerTime))
+        {
+            SystemControl.Instance.world.addEventQueue(anEvent);
+            this.delEvent(anEvent);
+            return;
         }
     }
 

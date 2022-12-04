@@ -7,7 +7,7 @@ public class EventContainer
     protected int triggerDay;
     protected int triggerTime;
     protected int triggerAffection;
-    private LinkedList<Event> events;
+    protected LinkedList<Event> events;
 
     public EventContainer()
     {
@@ -37,6 +37,7 @@ public class EventContainer
 
     public void executeEvent()
     {
+        Debug.Log("EventContainer.cs: executeEvent. this.events.First.Value: " + this.events.First.Value);
         this.events.First.Value.control();
     }
 
@@ -59,5 +60,23 @@ public class EventContainer
     public int getTriggerAffection()
     {
         return this.triggerAffection;
+    }
+
+    public void debugPrintInfo()
+    {
+        Debug.Log("DEBUG INFO: triggerDay: " + this.triggerDay);
+        Debug.Log("DEBUG INFO: triggerTime: " + this.triggerTime);
+        Debug.Log("DEBUG INFO: triggerAffection: " + this.triggerAffection);
+        Debug.Log("DEBUG INFO: eventsCount: " + this.events.Count);
+    }
+
+    public Event debugGetFirstEvent()
+    {
+        return this.events.First.Value;
+    }
+
+    public int debugGetEvCount()
+    {
+        return this.events.Count;
     }
 }

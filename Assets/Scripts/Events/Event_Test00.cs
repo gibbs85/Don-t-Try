@@ -2,50 +2,71 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Event_Test00 : EventContainer
+public class Event_Test00
 {
+    private EventContainer evContainer;
+
     public Event_Test00()
     {
-        this.triggerDay = 5;
-        this.triggerTime = 1000;
-        this.triggerAffection = 0;
+        this.evContainer = new EventContainer(2, 12, 0);
 
-        this.addEventFirst(new ev_init(this));
+        Debug.Log("Event_Test00: created");
+
+        this.evContainer.addEventFirst(new ev_init(this.evContainer));
+        Debug.Log("Event_Test00: firstEvent: "+this.evContainer.debugGetFirstEvent());
+    }
+
+    public EventContainer getEvContainer()
+    {
+        return this.evContainer;
     }
 }
 
-struct ev_init : Event
+public class ev_init : Event
 {
     EventContainer container;
 
     public ev_init(EventContainer container)
     {
+        Debug.Log("Event_Test00: ev_init : created");
         this.container = container;
     }
 
-    public bool control()
+    public override bool control()
     {
-        Debug.Log("Event_Test00: ev_init : EXECUTED");
+        Debug.Log("Event_Test00: ev_init : entered");
+        Debug.Log("event count: " + this.container.debugGetEvCount());
+        this.container.addEventLast(new ev_00_newNPC(this.container));
+        Debug.Log("event count: " + this.container.debugGetEvCount());
         this.container.deleteEvent();
-        this.container.addEventFirst(new ev_00(this.container));
         this.container.executeEvent();
 
         return true;
     }
 }
 
-struct ev_00 : Event
+public class ev_00_newNPC : Event
 {
     EventContainer container;
 
-    public ev_00(EventContainer container)
+    public ev_00_newNPC(EventContainer container)
     {
         this.container = container;
     }
 
-    public bool control()
+    public override bool control()
     {
-        Debug.Log("Event_Test00: ev_00 : EXECUTED");
+        Debug.Log("Event_Test00: ev_00 : entered");
+
+        NPC newNPC = new NPC("첫 대화 상대");
+        SystemControl.Instance.npcs.newNPC(newNPC);
+
+        SystemControl.Instance.msgr.AddNewChatRoom("첫 대화방");
+
+        int date = SystemControl.Instance.world.getDate();
+        SystemControl.Instance.msgr.addChat("첫 대화방", new Chat("첫 대화 상대", "Event_Test00에서 npc와 채팅을 추가하였습니다.", date));
+
+
         this.container.deleteEvent();
         return true;
     }

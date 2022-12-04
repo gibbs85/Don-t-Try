@@ -39,6 +39,12 @@ public class Messenger
         }
     }
 
+    public void AddNewChatRoom(string ChatRoomName)
+    {
+        ChatContainer chatRoom = new ChatContainer(ChatRoomName);
+        this.chatrooms.Add(chatRoom);
+    }
+
     public void test_AddNewChatRoom()
     {
         int date = SystemControl.Instance.world.getDate();
