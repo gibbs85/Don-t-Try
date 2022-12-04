@@ -26,4 +26,17 @@ public class NPCControl
     {
         this.NPCs.Add(npc);
     }
+
+    public void eventCheck()
+    {
+        foreach(NPC npc in this.NPCs)
+        {
+            npc.eventCheck();
+        }
+    }
+
+    public NPC getNPC(string nameNPC)
+    {
+        return this.NPCs.Find(npc => npc.getName() == nameNPC);
+    }
 }

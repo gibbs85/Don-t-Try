@@ -8,12 +8,11 @@ public class Event_Test00
 
     public Event_Test00()
     {
-        this.evContainer = new EventContainer(2, 12, 0);
+        this.evContainer = new EventContainer(0, 12, 0);
 
         Debug.Log("Event_Test00: created");
-
         this.evContainer.addEventFirst(new ev_init(this.evContainer));
-        Debug.Log("Event_Test00: firstEvent: "+this.evContainer.debugGetFirstEvent());
+        Debug.Log("Event_Test00: firstEvent: " + this.evContainer.debugGetFirstEvent());
     }
 
     public EventContainer getEvContainer()
@@ -24,8 +23,6 @@ public class Event_Test00
 
 public class ev_init : Event
 {
-    EventContainer container;
-
     public ev_init(EventContainer container)
     {
         Debug.Log("Event_Test00: ev_init : created");
@@ -47,7 +44,6 @@ public class ev_init : Event
 
 public class ev_00_newNPC : Event
 {
-    EventContainer container;
 
     public ev_00_newNPC(EventContainer container)
     {
@@ -56,16 +52,10 @@ public class ev_00_newNPC : Event
 
     public override bool control()
     {
-        Debug.Log("Event_Test00: ev_00 : entered");
+        Debug.Log("Event_Test00: ev_00_newNPC : entered");
 
-        NPC newNPC = new NPC("첫 대화 상대");
+        NPC newNPC = new NPC_MrPark();
         SystemControl.Instance.npcs.newNPC(newNPC);
-
-        SystemControl.Instance.msgr.AddNewChatRoom("첫 대화방");
-
-        int date = SystemControl.Instance.world.getDate();
-        SystemControl.Instance.msgr.addChat("첫 대화방", new Chat("첫 대화 상대", "Event_Test00에서 npc와 채팅을 추가하였습니다.", date));
-
 
         this.container.deleteEvent();
         return true;

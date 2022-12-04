@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class NPC
 {
-    private string name;
-    private int affection;
-    private LinkedList<EventContainer> eventsNPC;
+    protected string name;
+    protected int affection;
+    protected LinkedList<EventContainer> eventsNPC;
     //private bool queable;
 
+    protected NPC()
+    {
+        this.name = "NONE";
+        this.affection = 0;
+        this.eventsNPC = null;
+    }
 
     public NPC(string name)
     {
@@ -31,6 +37,9 @@ public class NPC
 
     public void eventCheck()
     {
+        if (this.eventsNPC.Count == 0)
+            return;
+
         EventContainer anEvent = this.eventsNPC.First.Value;
         int dateToday = SystemControl.Instance.world.getDate();
         int dateTrigger = anEvent.getTriggerDay();
@@ -45,12 +54,14 @@ public class NPC
         {
             SystemControl.Instance.world.addEventQueue(anEvent);
             this.delEvent(anEvent);
+            Debug.Log("NPC.cs: eventCheck(): world.addEventQueue, this.delEvent() if 1");
             return;
         }
         if ( (dateToday == dateTrigger) &&  (timeNow >= triggerTime))
         {
             SystemControl.Instance.world.addEventQueue(anEvent);
             this.delEvent(anEvent);
+            Debug.Log("NPC.cs: eventCheck(): world.addEventQueue, this.delEvent() if 2");
             return;
         }
     }
