@@ -45,6 +45,7 @@ public class EventContainer
         this.events.RemoveFirst();
     }
 
+
     public int getTriggerDay()
     {
         return this.triggerDay;

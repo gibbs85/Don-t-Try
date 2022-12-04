@@ -50,7 +50,7 @@ public class PhoneUI : MonoBehaviour
             //yield return new WaitForSeconds(0.01f);
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
             for (float f = 1f; f >= 0; f -= 0.01f)
             {
