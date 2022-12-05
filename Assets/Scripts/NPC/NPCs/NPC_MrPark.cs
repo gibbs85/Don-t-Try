@@ -6,7 +6,7 @@ public class NPC_MrPark : NPC
 {
     public NPC_MrPark()
     {
-        this.name = "박사장";
+        this.name = "박사장님";
         this.affection = 0;
         this.eventsNPC = new LinkedList<EventContainer>();
 

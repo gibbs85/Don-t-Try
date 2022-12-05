@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class Chat
 {
-    private string nameSpeaker;
-    private string dialog;
-    private int date;
-    private bool read;
+    protected string nameSpeaker;
+    protected string dialog;
+    protected int date;
+    protected bool read;
 
-    private bool isWaitBefore;
-    private bool isWaitAfter;
-    private float waitTimeBefore;
-    private float waitTimeAfter;
+    protected bool isWaitBefore;
+    protected bool isWaitAfter;
+    protected float waitTimeBefore;
+    protected float waitTimeAfter;
 
-    private bool isNextMsg;
-    private Chat nextMsg;
+    protected bool isNextMsg;
+    protected Chat nextMsg;
 
-    private bool isGiveMoney;
-    private double moneyGive;
+    protected bool isGiveMoney;
+    protected double moneyGive;
 
-    private bool isTakeMoney;
-    private double moneyTake;
+    protected bool isTakeMoney;
+    protected double moneyTake;
+
+    protected Chat()
+    {
+        this.nameSpeaker = "NONE";
+    }
 
     public Chat(string nameSpeaker, string dialog, int date)
     {
@@ -43,7 +48,7 @@ public class Chat
 
 
     public Chat(string nameSpeaker, string dialog, int date,
-        float waitTimeAfter
+        float waitTimeBefore
         )
     {
         this.nameSpeaker = nameSpeaker;
@@ -52,7 +57,7 @@ public class Chat
         this.read = false;
 
         this.isWaitBefore = true;
-        this.waitTimeAfter = waitTimeAfter;
+        this.waitTimeBefore = waitTimeBefore;
 
         this.isNextMsg = false;
         this.isGiveMoney = false;
