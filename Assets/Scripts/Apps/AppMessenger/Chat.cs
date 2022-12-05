@@ -23,6 +23,10 @@ public class Chat
     protected bool isTakeMoney;
     protected double moneyTake;
 
+    protected List<Chat> options;
+    protected int optionsCount;
+
+
     protected Chat()
     {
         this.nameSpeaker = "NONE";
@@ -64,6 +68,38 @@ public class Chat
         this.moneyGive = 0;
         this.isTakeMoney = false;
         this.moneyTake = 0;
+    }
+    public Chat(string nameSpeaker, Chat option1, int date, float waitTimeBefore)
+    {
+        this.options = new List<Chat>();
+        this.date = date;
+        this.waitTimeBefore = waitTimeBefore;
+
+        this.options.Add(option1);
+
+        this.optionsCount = 2;
+    }
+
+    public Chat(string nameSpeaker, Chat option1, Chat option2, int date, float waitTimeBefore)
+    {
+        this.options = new List<Chat>();
+        this.date = date;
+        this.waitTimeBefore = waitTimeBefore;
+
+        this.options.Add(option1);
+        this.options.Add(option2);
+
+        this.optionsCount = 2;
+    }
+
+    public Chat getOption(int index)
+    {
+        return this.options[index];
+    }
+
+    public int getCountOptions()
+    {
+        return this.optionsCount;
     }
 
     public bool getRead()

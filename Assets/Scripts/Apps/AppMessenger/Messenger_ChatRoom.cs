@@ -57,6 +57,8 @@ public class Messenger_ChatRoom : MonoBehaviour
         this.ChatRoom.readChecked();
         this.panelUpper.transform.Find("TextChatRoomName").GetComponentInChildren<TextMeshProUGUI>().text = this.ChatRoom.getNameChatRoom();
 
+
+
         //int countMaxMsg = 30;
         //int countMsgAll = this.ChatRoom.getCountChat()
         //int countMaxMsg = countMsgAll;
@@ -87,6 +89,41 @@ public class Messenger_ChatRoom : MonoBehaviour
             GameObject Instance = (GameObject)Instantiate(dialog, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
 
             Instance.transform.Find("ImageDialogBubble").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = chat.getString();
+        }
+
+        Debug.Log("refresh_msg_Added(): getChatToBeAdded(0): " + this.ChatRoom.getChatToBeAdded(0));
+        if (this.ChatRoom.getChatToBeAdded(0).getCountOptions() > 0)
+        {
+            this.btnNextChat.SetActive(false);
+
+            Chat chatWithOptions = this.ChatRoom.getChatToBeAdded(0);
+
+            Debug.Log("option found");
+
+            GameObject optionsBox;
+            Debug.Log("option point 1");
+            optionsBox = Resources.Load<GameObject>("Prefabs/DialogLineOptionRight");
+            Debug.Log("option point 2");
+            GameObject InstanceOptionsBox = (GameObject)Instantiate(optionsBox, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+            Debug.Log("option point 3");
+
+            for (int i = 0; i < chatWithOptions.getCountOptions(); i++)
+            {
+                Debug.Log("option point 4");
+                Chat option = chatWithOptions.getOption(i);
+                Debug.Log("option point 5");
+
+                GameObject optionObj = Resources.Load<GameObject>("Prefabs/BtnChatRoomOption");
+                Debug.Log("option point 6");
+                GameObject InstanceOption = (GameObject)Instantiate(optionObj, InstanceOptionsBox.transform.Find("DialogOptionBG"));
+                Debug.Log("option point 7");
+
+                InstanceOption.transform.Find("TextOption").GetComponentInChildren<TextMeshProUGUI>().text = option.getString();
+                InstanceOption.GetComponent<BtnInfoOption>().setOptionIndex(i);
+                Debug.Log("option point 8");
+            }
+
+            return;
         }
     }
 
@@ -119,6 +156,41 @@ public class Messenger_ChatRoom : MonoBehaviour
     //v2: 버튼 액션 포함
     public void refresh_msg_added()
     {
+        Debug.Log("refresh_msg_Added(): getChatToBeAdded(0): " + this.ChatRoom.getChatToBeAdded(0));
+        if (this.ChatRoom.getChatToBeAdded(0).getCountOptions() > 0 )
+        {
+            this.btnNextChat.SetActive(false);
+
+            Chat chatWithOptions = this.ChatRoom.getChatToBeAdded(0);
+
+            Debug.Log("option found");
+
+            GameObject optionsBox;
+            Debug.Log("option point 1");
+            optionsBox = Resources.Load<GameObject>("Prefabs/DialogLineOptionRight");
+            Debug.Log("option point 2");
+            GameObject InstanceOptionsBox = (GameObject)Instantiate(optionsBox, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+            Debug.Log("option point 3");
+
+            for (int i = 0; i < chatWithOptions.getCountOptions(); i++)
+            {
+                Debug.Log("option point 4");
+                Chat option = chatWithOptions.getOption(i);
+                Debug.Log("option point 5");
+
+                GameObject optionObj = Resources.Load<GameObject>("Prefabs/BtnChatRoomOption");
+                Debug.Log("option point 6");
+                GameObject InstanceOption = (GameObject)Instantiate(optionObj, InstanceOptionsBox.transform.Find("DialogOptionBG"));
+                Debug.Log("option point 7");
+
+                InstanceOption.transform.Find("TextOption").GetComponentInChildren<TextMeshProUGUI>().text = option.getString();
+                InstanceOption.GetComponent<BtnInfoOption>().setOptionIndex(i);
+                Debug.Log("option point 8");
+            }
+
+            return;
+        }
+
         string nameSpeakerBefore = "NONE";
         string nameSpeakerNow = "NONE";
 
@@ -185,6 +257,17 @@ public class Messenger_ChatRoom : MonoBehaviour
         //
         StartCoroutine("lockNextChat");
         StopCoroutine("lockNextChat");
+    }
+
+    public void BtnClickedOption(int indexOption)
+    {
+        this.ChatRoom.optionSelect(indexOption);
+        this.btnNextChat.SetActive(true);
+
+        int countchild = GameObject.Find("Viewport").transform.Find("Content").childCount;
+        Destroy(GameObject.Find("Viewport").transform.Find("Content").GetChild(countchild-1).gameObject);
+
+        this.refresh_msg_added();
     }
 
     IEnumerator lockNextChat()

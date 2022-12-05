@@ -45,20 +45,58 @@ public class Event_MrPark_intro_00 : Event
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "우린 성공했네. 아주 크게", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "*입금 메시지.", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "약속했던 금액에 더 얹었다네.", date, 1.0f));
-        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat("player", "감사합니다.", date, 1.0f));
+
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom,
+            new Chat(
+            nameSpeaker: "player",
+            option1: new Chat("player", "감사합니다.", date, 1.0f),
+            date: date,
+            waitTimeBefore: 1.0f
+            )
+            );
+
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "내가 할 말이지.", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "그런데 자네", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "내가 실패하면 어쩌려고 그랬나?", date, 1.0f));
-        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat("player", "믿고 있었습니다.", date, 1.0f));
+
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, 
+            new Chat(
+            nameSpeaker: "player",
+            option1: new Chat("player", "믿고 있었습니다.", date, 1.0f),
+            option2: new Chat("player", "어떻게든 살아갔을 겁니다.", date, 1.0f),
+            date: date,
+            waitTimeBefore: 1.0f
+            )
+            );
+
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "좋은 말이긴 하나", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "이제는 좀 말리고 싶어지는 구만.", date, 1.0f));
-        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat("player", "투자도 할만하군요.", date, 1.0f));
+
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom,
+            new Chat(
+            nameSpeaker: "player",
+            option1: new Chat("player", "투자도 할만하군요.", date, 1.0f),
+            date: date,
+            waitTimeBefore: 1.0f
+            )
+            );
+
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "내가 방금 말리고 싶다고 하지 않았나.", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "곤란한 사람이야", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "그럼 내가 사람을 좀 소개해주겠네.", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "작은 사업을 준비하고 있던데", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "내 눈엔 괜찮아 보이더군", date, 1.0f));
-        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat("player", "사장님도 투자하시나요?", date, 1.0f));
+
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom,
+            new Chat(
+            nameSpeaker: "player",
+            option1: new Chat("player", "감사합니다.", date, 1.0f),
+            option2: new Chat("player", "사장님도 투자하시나요?", date, 1.0f),
+            date: date,
+            waitTimeBefore: 1.0f
+            )
+            );
+
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "물론 나도 작게 보태려고 하네만", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "조심하게나", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "자네에게 내가 할 말은 아니지만", date, 1.0f));

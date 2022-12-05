@@ -9,6 +9,8 @@ public class ChatContainer
     public int unread;
     private LinkedList<Chat> chatLog;
     private LinkedList<Chat> chatTobeAdded;
+    //private ArrayList chatTobeAdded;
+
 
     //public bool addChat(Chat chat);
     //public string getNameChatRoom();
@@ -49,6 +51,26 @@ public class ChatContainer
     public void addChatToBeAdded(Chat chat)
     {
         this.chatTobeAdded.AddLast(chat);
+    }
+
+    public void addChatWithOptions(ChatWithOptions chatWithOptions)
+    {
+        this.chatTobeAdded.AddLast(chatWithOptions);
+    }
+
+    private Chat getChatWithOptions()
+    {
+        if (this.chatTobeAdded.First.Value.getCountOptions() > 0)
+        {
+            return this.chatTobeAdded.First.Value;
+        }
+        else
+        {
+            Debug.Log("ChatContainer.cs: getChatWithOptions: doesn't have options");
+            Debug.Log("ChatContainer.cs: getChatWithOptions: returning null");
+            return null;
+        }
+
     }
 
     public string getNameChatRoom()
@@ -106,6 +128,13 @@ public class ChatContainer
         //Debug.Log("toLog: addChat passed");
         this.chatTobeAdded.RemoveFirst();
         //Debug.Log("toLog: removeFirst passed");
+    }
+
+    public void optionSelect(int index)
+    {
+        Chat selectedChat = this.getChatWithOptions().getOption(index);
+        this.chatTobeAdded.RemoveFirst();
+        this.chatTobeAdded.AddFirst(selectedChat);
     }
 
     public void readChecked()
