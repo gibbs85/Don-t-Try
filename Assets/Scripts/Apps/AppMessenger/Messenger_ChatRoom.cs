@@ -67,13 +67,26 @@ public class Messenger_ChatRoom : MonoBehaviour
 
         this.msgCountToShow = this.ChatRoom.getCountChat();
 
+        string nameSpeakerBefore = "NONE";
+        string nameSpeakerNow = "NONE";
 
         for (int i = 0; i < this.msgCountToShow; i++)
         {
-            GameObject dialogLeft = Resources.Load<GameObject>("Prefabs/DialogLineLeft");
-            GameObject Instance = (GameObject)Instantiate(dialogLeft, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+            Chat chat = this.ChatRoom.getChat(i);
+            nameSpeakerNow = chat.getNameSpeaker();
 
-            Instance.transform.Find("ImageDialogBubble").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = this.ChatRoom.getChat(i).getString();
+            GameObject dialog;
+
+            if (nameSpeakerNow.Equals("player"))
+                dialog = Resources.Load<GameObject>("Prefabs/DialogLineRight");
+            else if (nameSpeakerNow.Equals(nameSpeakerBefore))
+                dialog = Resources.Load<GameObject>("Prefabs/DialogLineLeft");
+            else
+                dialog = Resources.Load<GameObject>("Prefabs/DialogLineLeftWithProfile");
+
+            GameObject Instance = (GameObject)Instantiate(dialog, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+
+            Instance.transform.Find("ImageDialogBubble").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = chat.getString();
         }
     }
 
@@ -106,6 +119,9 @@ public class Messenger_ChatRoom : MonoBehaviour
     //v2: 버튼 액션 포함
     public void refresh_msg_added()
     {
+        string nameSpeakerBefore = "NONE";
+        string nameSpeakerNow = "NONE";
+
         this.ChatRoom.readChecked();
         //int msgShowed = this.msgCountToShow;                
         //this.msgCountToShow = this.ChatRoom.getCountChat();
@@ -116,22 +132,26 @@ public class Messenger_ChatRoom : MonoBehaviour
         if (this.msgCountToShow == 0)
             return;
 
-        Debug.Log("refresh_msg_added: passed if()");
         //
         Chat chat = this.ChatRoom.getChatToBeAdded(0);
-        Debug.Log("refresh_msg_added: passed getChatToBeAdded()");
         this.ChatRoom.toLog();
-        Debug.Log("refresh_msg_added: passed toLog()");
         GameObject dialog;
 
-        Debug.Log("refresh_msg_added: chat.toLog(). countToBeAdded: "+this.ChatRoom.getCountChatToBeAdded());
+        if (this.ChatRoom.getCountChat() > 0)
+        {
+            nameSpeakerBefore = this.ChatRoom.getChat(this.ChatRoom.getCountChat() - 2).getNameSpeaker();
+        }
+        nameSpeakerNow = chat.getNameSpeaker();
 
-        if (chat.getNameSpeaker().Equals("player"))
+        Debug.Log("nameSpeakerBefore: " + nameSpeakerBefore);
+        Debug.Log("nameSpeakerNow: " + nameSpeakerNow);
+
+        if (nameSpeakerNow.Equals("player"))
             dialog = Resources.Load<GameObject>("Prefabs/DialogLineRight");
-        else
+        else if (nameSpeakerNow.Equals(nameSpeakerBefore))
             dialog = Resources.Load<GameObject>("Prefabs/DialogLineLeft");
-
-        Debug.Log("refresh_msg_added: passed if else()");
+        else
+            dialog = Resources.Load<GameObject>("Prefabs/DialogLineLeftWithProfile");
 
         GameObject Instance = (GameObject)Instantiate(dialog, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
 

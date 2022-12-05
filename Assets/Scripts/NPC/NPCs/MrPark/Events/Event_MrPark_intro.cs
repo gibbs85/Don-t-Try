@@ -36,13 +36,17 @@ public class Event_MrPark_intro_00 : Event
         SystemControl.Instance.msgr.AddNewChatRoom(nameChatRoom);
 
         int date = SystemControl.Instance.world.getDate();
-        SystemControl.Instance.msgr.addChat(nameChatRoom, new Chat(nameNPC, "Event_MrPark_intro_00 npc와 채팅을 추가하였습니다.", date));
+        SystemControl.Instance.msgr.addChat(nameChatRoom, new Chat(nameNPC, "프로필 메시지 테스트합니다.", date));
 
-        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "tobeadded에 추가된 메시지입니다. 번호: 00, waittime: 1.0f", date, 1.0f));
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "프로필 메시지 테스트합니다. toBeAdded 첫 번째", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "tobeadded에 추가된 메시지입니다. 번호: 01, waittime: 1.0f", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "tobeadded에 추가된 메시지입니다. 번호: 02, waittime: 1.0f", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "tobeadded에 추가된 메시지입니다. 번호: 03, waittime: 1.0f", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "tobeadded에 추가된 메시지입니다. 번호: 04, waittime: 1.0f", date, 1.0f));
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat("player", "player가 말 합니다. 번호: 05, waittime: 1.0f", date, 1.0f));
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat("player", "player가 말 합니다. 번호: 06, waittime: 1.0f", date, 1.0f));
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "tobeadded에 추가된 메시지입니다. 번호: 07, waittime: 1.0f", date, 1.0f));
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "tobeadded에 추가된 메시지입니다. 번호: 08, waittime: 1.0f", date, 1.0f));
 
 
         this.container.deleteEvent();
