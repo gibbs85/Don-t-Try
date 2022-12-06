@@ -84,6 +84,25 @@ public class Chat
         //this.optionsCount = 2;
     }
 
+    public Chat(string nameSpeaker, Chat option1, Chat option2, Chat option3, int date, float waitTimeBefore)
+    {
+        this.options = new List<Chat>();
+        this.events = new LinkedList<Event>();
+        this.date = date;
+        this.waitTimeBefore = waitTimeBefore;
+
+        this.options.Add(option1);
+        this.options.Add(option2);
+        this.options.Add(option3);
+
+        //this.optionsCount = 2;
+    }
+
+    public void addOption(Chat option)
+    {
+        this.options.Add(option);
+    }
+
     public Chat getOption(int index)
     {
         return this.options[index];
