@@ -14,18 +14,11 @@ public class Chat
     protected float waitTimeBefore;
     protected float waitTimeAfter;
 
-    protected bool isNextMsg;
-    protected Chat nextMsg;
-
-    protected bool isGiveMoney;
-    protected double moneyGive;
-
-    protected bool isTakeMoney;
-    protected double moneyTake;
-
     protected List<Chat> options;
-    protected int optionsCount;
 
+    protected LinkedList<Event> events;
+    //public addEvent(Event anEvent)
+    //public executeEvents()
 
     protected Chat()
     {
@@ -34,6 +27,9 @@ public class Chat
 
     public Chat(string nameSpeaker, string dialog, int date)
     {
+        this.options = new List<Chat>();
+        this.events = new LinkedList<Event>();
+
         this.nameSpeaker = nameSpeaker;
         this.dialog = dialog;
         this.date = date;
@@ -43,11 +39,7 @@ public class Chat
         this.waitTimeBefore = 0f;
         this.isWaitAfter = false;
         this.waitTimeAfter = 0;
-        this.isNextMsg = false;
-        this.isGiveMoney = false;
-        this.moneyGive = 0;
-        this.isTakeMoney = false;
-        this.moneyTake = 0;
+
     }
 
 
@@ -55,6 +47,9 @@ public class Chat
         float waitTimeBefore
         )
     {
+        this.options = new List<Chat>();
+        this.events = new LinkedList<Event>();
+
         this.nameSpeaker = nameSpeaker;
         this.dialog = dialog;
         this.date = date;
@@ -62,34 +57,31 @@ public class Chat
 
         this.isWaitBefore = true;
         this.waitTimeBefore = waitTimeBefore;
-
-        this.isNextMsg = false;
-        this.isGiveMoney = false;
-        this.moneyGive = 0;
-        this.isTakeMoney = false;
-        this.moneyTake = 0;
     }
+
     public Chat(string nameSpeaker, Chat option1, int date, float waitTimeBefore)
     {
         this.options = new List<Chat>();
+        this.events = new LinkedList<Event>();
         this.date = date;
         this.waitTimeBefore = waitTimeBefore;
 
         this.options.Add(option1);
 
-        this.optionsCount = 2;
+        //this.optionsCount = 2;
     }
 
     public Chat(string nameSpeaker, Chat option1, Chat option2, int date, float waitTimeBefore)
     {
         this.options = new List<Chat>();
+        this.events = new LinkedList<Event>();
         this.date = date;
         this.waitTimeBefore = waitTimeBefore;
 
         this.options.Add(option1);
         this.options.Add(option2);
 
-        this.optionsCount = 2;
+        //this.optionsCount = 2;
     }
 
     public Chat getOption(int index)
@@ -99,7 +91,7 @@ public class Chat
 
     public int getCountOptions()
     {
-        return this.optionsCount;
+        return this.options.Count;
     }
 
     public bool getRead()
@@ -125,6 +117,29 @@ public class Chat
     public float getWaitTimeAfter()
     {
         return this.waitTimeAfter;
+    }
+
+    public void addEvent(Event anEvent)
+    {
+        this.events.AddLast(anEvent);
+    }
+
+    public void addEvent<T>(Event anEvent) where T : Event
+    {
+        this.events.AddLast(anEvent);
+    }
+
+    public void executeEvents()
+    {
+        Debug.Log("Chat.cs: executeEvents(): entered");
+        Debug.Log("Chat.cs: executeEvents(): this.events.Count: "+this.events.Count);
+        if (this.events.Count > 0)
+        {
+            foreach (Event anEvent in this.events)
+            {
+                anEvent.control();
+            }
+        }
     }
 }
 

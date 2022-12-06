@@ -52,6 +52,7 @@ public class Player
 
     public bool spendMoney(double money)
     {
+        Debug.Log("Player.cs: spendMoney(): entered");
         if (money > this.money) // 소지금이 부족할 경우 false 리턴
             return false;
 

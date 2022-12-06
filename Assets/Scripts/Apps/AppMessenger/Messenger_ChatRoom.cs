@@ -91,39 +91,42 @@ public class Messenger_ChatRoom : MonoBehaviour
             Instance.transform.Find("ImageDialogBubble").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = chat.getString();
         }
 
-        Debug.Log("refresh_msg_Added(): getChatToBeAdded(0): " + this.ChatRoom.getChatToBeAdded(0));
-        if (this.ChatRoom.getChatToBeAdded(0).getCountOptions() > 0)
+        //Debug.Log("refresh_msg_Added(): getChatToBeAdded(0): " + this.ChatRoom.getChatToBeAdded(0));
+        if (this.ChatRoom.getCountChatToBeAdded() > 0)
         {
-            this.btnNextChat.SetActive(false);
-
-            Chat chatWithOptions = this.ChatRoom.getChatToBeAdded(0);
-
-            Debug.Log("option found");
-
-            GameObject optionsBox;
-            Debug.Log("option point 1");
-            optionsBox = Resources.Load<GameObject>("Prefabs/DialogLineOptionRight");
-            Debug.Log("option point 2");
-            GameObject InstanceOptionsBox = (GameObject)Instantiate(optionsBox, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
-            Debug.Log("option point 3");
-
-            for (int i = 0; i < chatWithOptions.getCountOptions(); i++)
+            if (this.ChatRoom.getChatToBeAdded(0).getCountOptions() > 0)
             {
-                Debug.Log("option point 4");
-                Chat option = chatWithOptions.getOption(i);
-                Debug.Log("option point 5");
+                this.btnNextChat.SetActive(false);
 
-                GameObject optionObj = Resources.Load<GameObject>("Prefabs/BtnChatRoomOption");
-                Debug.Log("option point 6");
-                GameObject InstanceOption = (GameObject)Instantiate(optionObj, InstanceOptionsBox.transform.Find("DialogOptionBG"));
-                Debug.Log("option point 7");
+                Chat chatWithOptions = this.ChatRoom.getChatToBeAdded(0);
 
-                InstanceOption.transform.Find("TextOption").GetComponentInChildren<TextMeshProUGUI>().text = option.getString();
-                InstanceOption.GetComponent<BtnInfoOption>().setOptionIndex(i);
-                Debug.Log("option point 8");
+                Debug.Log("option found");
+
+                GameObject optionsBox;
+                Debug.Log("option point 1");
+                optionsBox = Resources.Load<GameObject>("Prefabs/DialogLineOptionRight");
+                Debug.Log("option point 2");
+                GameObject InstanceOptionsBox = (GameObject)Instantiate(optionsBox, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+                Debug.Log("option point 3");
+
+                for (int i = 0; i < chatWithOptions.getCountOptions(); i++)
+                {
+                    Debug.Log("option point 4");
+                    Chat option = chatWithOptions.getOption(i);
+                    Debug.Log("option point 5");
+
+                    GameObject optionObj = Resources.Load<GameObject>("Prefabs/BtnChatRoomOption");
+                    Debug.Log("option point 6");
+                    GameObject InstanceOption = (GameObject)Instantiate(optionObj, InstanceOptionsBox.transform.Find("DialogOptionBG"));
+                    Debug.Log("option point 7");
+
+                    InstanceOption.transform.Find("TextOption").GetComponentInChildren<TextMeshProUGUI>().text = option.getString();
+                    InstanceOption.GetComponent<BtnInfoOption>().setOptionIndex(i);
+                    Debug.Log("option point 8");
+                }
+
+                return;
             }
-
-            return;
         }
     }
 
@@ -156,39 +159,42 @@ public class Messenger_ChatRoom : MonoBehaviour
     //v2: 버튼 액션 포함
     public void refresh_msg_added()
     {
-        Debug.Log("refresh_msg_Added(): getChatToBeAdded(0): " + this.ChatRoom.getChatToBeAdded(0));
-        if (this.ChatRoom.getChatToBeAdded(0).getCountOptions() > 0 )
+        //Debug.Log("refresh_msg_Added(): getChatToBeAdded(0): " + this.ChatRoom.getChatToBeAdded(0));
+        if (this.ChatRoom.getCountChatToBeAdded() > 0)
         {
-            this.btnNextChat.SetActive(false);
-
-            Chat chatWithOptions = this.ChatRoom.getChatToBeAdded(0);
-
-            Debug.Log("option found");
-
-            GameObject optionsBox;
-            Debug.Log("option point 1");
-            optionsBox = Resources.Load<GameObject>("Prefabs/DialogLineOptionRight");
-            Debug.Log("option point 2");
-            GameObject InstanceOptionsBox = (GameObject)Instantiate(optionsBox, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
-            Debug.Log("option point 3");
-
-            for (int i = 0; i < chatWithOptions.getCountOptions(); i++)
+            if (this.ChatRoom.getChatToBeAdded(0).getCountOptions() > 0)
             {
-                Debug.Log("option point 4");
-                Chat option = chatWithOptions.getOption(i);
-                Debug.Log("option point 5");
+                this.btnNextChat.SetActive(false);
 
-                GameObject optionObj = Resources.Load<GameObject>("Prefabs/BtnChatRoomOption");
-                Debug.Log("option point 6");
-                GameObject InstanceOption = (GameObject)Instantiate(optionObj, InstanceOptionsBox.transform.Find("DialogOptionBG"));
-                Debug.Log("option point 7");
+                Chat chatWithOptions = this.ChatRoom.getChatToBeAdded(0);
 
-                InstanceOption.transform.Find("TextOption").GetComponentInChildren<TextMeshProUGUI>().text = option.getString();
-                InstanceOption.GetComponent<BtnInfoOption>().setOptionIndex(i);
-                Debug.Log("option point 8");
+                Debug.Log("option found");
+
+                GameObject optionsBox;
+                Debug.Log("option point 1");
+                optionsBox = Resources.Load<GameObject>("Prefabs/DialogLineOptionRight");
+                Debug.Log("option point 2");
+                GameObject InstanceOptionsBox = (GameObject)Instantiate(optionsBox, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
+                Debug.Log("option point 3");
+
+                for (int i = 0; i < chatWithOptions.getCountOptions(); i++)
+                {
+                    Debug.Log("option point 4");
+                    Chat option = chatWithOptions.getOption(i);
+                    Debug.Log("option point 5");
+
+                    GameObject optionObj = Resources.Load<GameObject>("Prefabs/BtnChatRoomOption");
+                    Debug.Log("option point 6");
+                    GameObject InstanceOption = (GameObject)Instantiate(optionObj, InstanceOptionsBox.transform.Find("DialogOptionBG"));
+                    Debug.Log("option point 7");
+
+                    InstanceOption.transform.Find("TextOption").GetComponentInChildren<TextMeshProUGUI>().text = option.getString();
+                    InstanceOption.GetComponent<BtnInfoOption>().setOptionIndex(i);
+                    Debug.Log("option point 8");
+                }
+
+                return;
             }
-
-            return;
         }
 
         string nameSpeakerBefore = "NONE";
@@ -228,6 +234,10 @@ public class Messenger_ChatRoom : MonoBehaviour
         GameObject Instance = (GameObject)Instantiate(dialog, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
 
         Instance.transform.Find("ImageDialogBubble").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = chat.getString();
+
+        Debug.Log("Messenger_ChatRoom.cs: refresh_msg_added(): before chat.executeEvents()");
+        chat.executeEvents();
+
         //this.BtnClickedReadingMsg(chat.getWaitTimeAfter());
         this.waitTime = chat.getWaitTimeAfter();
         //StartCoroutine("lockNextChat");

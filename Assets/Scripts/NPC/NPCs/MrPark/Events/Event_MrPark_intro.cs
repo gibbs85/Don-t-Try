@@ -43,7 +43,12 @@ public class Event_MrPark_intro_00 : Event
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "성공할 거란 확신은 없었네.", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "소식은 들었을 거라 생각하네만", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "우린 성공했네. 아주 크게", date, 1.0f));
-        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "*입금 메시지.", date, 1.0f));
+
+        Chat chat = new Chat(nameNPC, "입금은 확인되었나?", date, 1.0f);
+        chat.addEvent<Event_General_GiveMoney>(new Event_General_GiveMoney(60000000.0));
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, chat);
+
+
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "약속했던 금액에 더 얹었다네.", date, 1.0f));
 
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom,
@@ -54,6 +59,7 @@ public class Event_MrPark_intro_00 : Event
             waitTimeBefore: 1.0f
             )
             );
+
 
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "내가 할 말이지.", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "그런데 자네", date, 1.0f));
