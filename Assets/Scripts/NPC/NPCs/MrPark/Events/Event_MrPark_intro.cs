@@ -45,7 +45,7 @@ public class Event_MrPark_intro_00 : Event
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "우린 성공했네. 아주 크게", date, 1.0f));
 
         Chat chat = new Chat(nameNPC, "입금은 확인되었나?", date, 1.0f);
-        chat.addEvent<Event_General_GiveMoney>(new Event_General_GiveMoney(60000000.0));
+        chat.addEvent<Event_General_GetMoney>(new Event_General_GetMoney(60000000.0));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, chat);
 
 
@@ -111,7 +111,10 @@ public class Event_MrPark_intro_00 : Event
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "그래.", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "연락은 그 친구에게서 곧 올걸세", date, 1.0f));
         SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "다음에 또 보도록 하지", date, 1.0f));
-        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, new Chat(nameNPC, "다시 한 번 고맙네.", date, 1.0f));
+
+        Chat chat2 = new Chat(nameNPC, "다시 한 번 고맙네", date, 1.0f);
+        chat2.addEvent<Event_Comet_NewNPC>(new Event_Comet_NewNPC());
+        SystemControl.Instance.msgr.addChatToBeAdded(nameChatRoom, chat2);
 
         this.container.deleteEvent();
         Debug.Log("Event_MrPark_intro_00 : control(): ended");

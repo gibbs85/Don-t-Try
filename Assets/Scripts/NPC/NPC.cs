@@ -37,6 +37,8 @@ public class NPC
 
     public void eventCheck()
     {
+        Debug.Log("NPC.cs: eventCheck(): entered");
+
         if (this.eventsNPC.Count == 0)
             return;
 
