@@ -89,6 +89,7 @@ public class Messenger_ChatRoom : MonoBehaviour
             GameObject Instance = (GameObject)Instantiate(dialog, GameObject.Find("AppMessenger").transform.Find("ChatRoom").transform.Find("Scroll View Stocks All").transform.Find("Viewport").transform.Find("Content"));
 
             Instance.transform.Find("ImageDialogBubble").transform.Find("TextDialog").GetComponentInChildren<TextMeshProUGUI>().text = chat.getString();
+            nameSpeakerBefore = nameSpeakerNow;
         }
 
         //Debug.Log("refresh_msg_Added(): getChatToBeAdded(0): " + this.ChatRoom.getChatToBeAdded(0));
