@@ -12,6 +12,20 @@ using System.Linq;
 //    TIME_END_OF_DAY = 15
 //}
 
+enum SettingsStock
+{
+    //COUNT_STOCKS = 9,
+
+    //RECORD_LENGTH_MAX = 100000,
+    //COUNT_UPDATE_PER_HOUR = 60,
+    COUNT_UPDATE_PER_HOUR = 12,
+    COUNT_HOUR_PER_DAY = 24,
+    COUNT_UPDATE_DAYS_PREPLAY = 30,
+    TIME_START_OF_DAY = 9,
+    TIME_END_OF_DAY = 15
+    //COUNT_TIME_PER_DAY = 3
+}
+
 
 
 public struct StockBought
