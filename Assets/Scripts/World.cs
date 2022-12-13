@@ -148,8 +148,8 @@ public class World
         }
 
         this.time = this.timeTurns[this.turn];
-        //SystemControl.Instance.stockControl.updateAllStocks(this.time - this.timeTurns[this.turn - 1]);//not sure
-        //Debug.Log("World.cs: nextTurn(): stockControl.updateAllStocks() completed");
+        SystemControl.Instance.stockControl.updateAllStocks(this.time - this.timeTurns[this.turn - 1]);//not sure
+        Debug.Log("World.cs: nextTurn(): stockControl.updateAllStocks() completed");
 
         UI_GamePlay.update_time();
         this.eventCheck();
